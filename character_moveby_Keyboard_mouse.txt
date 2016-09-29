@@ -1,0 +1,150 @@
+캐릭터 이동과 관련하여 예제 2 모든 기능을 함수로 정의하여 추후에 사용하기 편리하게 수정!
+
+예제 2 내용 - > 캐릭터 원으로 이동하는 것! // 삼각함수 부분 수정 필요 -> 정밀값이 아님
+
+
+from pico2d import *
+
+import math
+
+def handle_events():
+
+    global running
+    global onoff_move, onoff_size, onoff_keydown
+    global mainx, mainy
+
+    events = get_events()
+
+    for event in events:
+        if event.type == SDL_KEYDOWN:
+            onoff_keydown = 1
+        elif event.type == SDL_KEYUP:
+            onoff_keydown = 0
+
+        if event.type == SDL_QUIT:
+            running = False
+        if event.type == SDL_KEYUP:
+            onoff_move = 0
+            onoff_size = 0
+        if event.key == SDLK_UP:
+            #mainy = mainy + 10
+            onoff_move = 1
+        elif event.key == SDLK_DOWN:
+            #mainy = mainy - 10
+            onoff_move = 2
+        elif event.key == SDLK_RIGHT:
+            #mainx = mainx + 10
+            onoff_move = 3
+        elif event.key == SDLK_LEFT:
+            #mainx = mainx - 10
+            onoff_move = 4
+        elif event.key == SDLK_a:
+            onoff_size = 1
+            """r = r + 10
+            if r == 310:
+                r = 300"""
+        elif event.key == SDLK_d:
+            onoff_size = 2
+            """r = r - 10
+            if r == 10:
+                r = 20"""
+        elif event.key == SDLK_ESCAPE:
+            running = False
+        elif event.type == SDL_MOUSEMOTION:
+            mainx, mainy = event.x, 600 - event.y
+
+def change_angle():
+
+    global angle
+
+    angle = angle + 1
+
+    if angle == 125:
+        angle = 0
+def move_effect():
+    if onoff_keydown:
+        global mainx
+        global mainy
+        global r
+        global onoff_move, onoff_size
+
+        if onoff_move or onoff_size:
+            if onoff_move == 1:
+                mainy = mainy + 10
+            elif onoff_move == 2:
+                mainy = mainy - 10
+            elif onoff_move == 3:
+                mainx = mainx + 10
+            elif onoff_move == 4:
+                mainx = mainx - 10
+            elif onoff_size == 1:
+                r = r + 10
+            elif onoff_size == 2:
+                r = r - 10
+def about_character():
+    global r, frame, mainx, mainy
+
+    cha_x = r * math.cos(angle / 20) + mainx
+    cha_y = r * math.sin(angle / 20) + mainy
+
+    character.clip_draw(frame * 100, 0, 100, 100, mainx, mainy)
+    character.clip_draw(frame * 100, 0, 100, 100, cha_x, cha_y)
+
+    frame = (frame + 1) % 8
+def make_background():
+    grass.draw(400, 30)
+
+open_canvas()
+#이거 어케 숨기려나 몰라
+
+grass = load_image('grass.png')
+character = load_image('run_animation.png')
+
+running = True
+onoff_move = 0
+onoff_size = 0
+onoff_keydown = 0
+mainx = 400
+mainy = 300
+frame = 0
+r = 100
+angle = 0
+x = 0
+y = 0
+
+
+while (running):
+    clear_canvas()
+
+    make_background()
+    about_character()
+    handle_events()
+    change_angle()
+    update_canvas()
+    move_effect()
+
+    delay(0.05)
+
+close_canvas()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
