@@ -28,10 +28,10 @@ class Back:
 
 class Boy:
     def __init__(self):
-        self.x, self.y = 0, 110
+        self.x, self.y = 0, 120
         self.speed = 5
         self.frame = 0
-        self.image = load_image('Father_sprite.png')
+        self.image = load_image('youngFather_character_sprite.png')
         self.dir = 0
         self.frame_time = 0
 
