@@ -12,16 +12,18 @@ SCREEN_Y = 720
 
 name = "MainState"
 
+MAPMOVE = 0
 boy = None
 back = None
 font = None
 
 class Back:
+    global MAPMOVE
     def __init__(self):
         self.image = load_image('MAP_1.png')
 
     def draw(self):
-        self.image.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        self.image.clip_draw_to_origin(0 + MAPMOVE, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
 class Boy:
@@ -33,9 +35,12 @@ class Boy:
         self.dir = 0
 
     def update(self):
+        global MAPMOVE
         if self.dir:
             self.frame = (self.frame + 1) % 8
-        self.x += self.dir
+
+        self.x += self.dir * self.speed
+        MAPMOVE += self.dir * self.speed
 
     def draw(self):
         self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
