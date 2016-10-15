@@ -31,19 +31,28 @@ class Boy:
         self.x, self.y = 0, 110
         self.speed = 5
         self.frame = 0
-        self.image = load_image('run_animation.png')
+        self.image = load_image('Father_sprite.png')
         self.dir = 0
+        self.frame_time = 0
 
     def update(self):
         global MAPMOVE
-        if self.dir:
-            self.frame = (self.frame + 1) % 8
+        if self.dir and self.frame_time % 5 == 0:
+            self.frame = self.frame % 6 + 1
 
-        self.x += self.dir * self.speed
+        if self.speed:
+            self.frame_time = self.frame_time + 1
+
+        if self.frame_time % 4 == 0:
+            self.x += self.dir * self.speed
+
         MAPMOVE += self.dir * self.speed
 
     def draw(self):
-        self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
+        if self.dir == 1:
+            self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+        elif self.dir == -1:
+            self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
 
 def enter():
     global boy, back
@@ -60,12 +69,15 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_LEFT:
                 boy.dir = -1
+                boy.speed = 5
             elif event.key == SDLK_RIGHT:
                 boy.dir = 1
+                boy.speed = 5
             elif event.key == SDLK_ESCAPE:
                 game_framework.change_state(title_state)
         elif event.type == SDL_KEYUP:
-            boy.dir = 0
+            boy.frame = 0
+            boy.speed = 0
 
 def exit():
     global boy, back
