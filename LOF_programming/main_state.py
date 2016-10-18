@@ -74,6 +74,7 @@ class Back:
         self.image = load_image('MAP_1.png')
         self.image_front = load_image('MAP_1_front.png')
         self.grid_img = load_image('grid.png')
+        self.thanks_img = load_image('thanksto.png')
 
     def draw(self):
         if GAME_VIEW == 0:
@@ -87,6 +88,8 @@ class Back:
         elif GAME_VIEW == 6:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
+
+
     def draw_front(self):
         if GAME_VIEW == 0:
             self.image_front.clip_draw_to_origin(160,140, 580, 340, 0, 0, SCREEN_X, SCREEN_Y)
@@ -97,7 +100,8 @@ class Back:
         elif GAME_VIEW == 3 or GAME_VIEW == 4 or GAME_VIEW == 5:
             self.image_front.clip_draw_to_origin(0 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 6:
-            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            #self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.thanks_img.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
         if grid_button == 1:
@@ -271,7 +275,7 @@ def handle_events():
     global GAME_VIEW
     global view_change
     global grid_button
-    
+
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:

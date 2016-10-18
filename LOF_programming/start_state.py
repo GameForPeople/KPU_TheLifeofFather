@@ -6,17 +6,19 @@ from pico2d import *
 
 name = "StartState"
 image = None
+image2 = None
 logo_time = 0.0
-onoff_push = 0
+fun_push = 0
 #alpha_value = 0
 
 SCREEN_X = 1280
 SCREEN_Y = 720
 
 def enter():
-    global image
+    global image, image2
     open_canvas()
     image = load_image('WarpLogo.png')
+    image2 = load_image('DESIGNEDBY.png')
     #image_1 = load_image()
     #image.opacify(0)
 
@@ -29,7 +31,7 @@ def exit():
 
 def update():
     global logo_time
-    global onoff_push
+    global fun_push
     #global alpha_value
 
     #alpha_value = alpha_value + 10
@@ -37,20 +39,23 @@ def update():
     if (logo_time > 0.5):
         logo_time = 0
         # game_framework.quit()
-        game_framework.push_state(title_state)
-        onoff_push = 1
+        fun_push = fun_push + 1
 
-    if (onoff_push != 1):
+    if fun_push < 2:
         delay(0.01)
         logo_time += 0.01
-
+    if fun_push == 2:
+        game_framework.push_state(title_state)
 def draw():
-    global image
+    global image, image2, fun_push
    # global alpha_value
 
     clear_canvas()
 
-    image.clip_draw_to_origin(0, 0 , 600, 300, 0, 0, SCREEN_X, SCREEN_Y )
+    if fun_push == 0:
+        image.clip_draw_to_origin(0, 0 , 600, 300, 0, 0, SCREEN_X, SCREEN_Y )
+    if fun_push == 1:
+        image2.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
     #image.opacify(100)
 
     update_canvas()

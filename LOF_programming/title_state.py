@@ -4,11 +4,16 @@ from pico2d import *
 
 name = "TitleState"
 image = None
+bgm = None
 
 
 def enter():
-    global image
+    global image, bgm
+
     image = load_image('title.png')
+    bgm = Music('Main_BGM.wav')
+
+    #bgm.play()
 
 def exit():
     global image
