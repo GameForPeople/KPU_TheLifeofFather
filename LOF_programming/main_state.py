@@ -25,6 +25,7 @@ view_change = 0
 change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
 change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
 
+grid_button = 0
 
 boy = None
 back = None
@@ -99,7 +100,8 @@ class Back:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
-        self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        if grid_button == 1:
+                self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 class Boy:
     def __init__(self):
@@ -258,8 +260,6 @@ def handle_view():
         if MAP_MOVE == 600:
             GAME_VIEW = 4
 
-
-
 def enter():
     global boy, back, object_light
     boy = Boy()
@@ -270,7 +270,8 @@ def handle_events():
     global boy
     global GAME_VIEW
     global view_change
-
+    global grid_button
+    
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -288,6 +289,12 @@ def handle_events():
                 boy.speed = BOY_SPEED
             elif event.key == SDLK_ESCAPE:
                 game_framework.change_state(title_state)
+            elif event.key == SDLK_g:
+                if grid_button == 0:
+                    grid_button = 1
+                elif grid_button == 1:
+                    grid_button = 0
+
         elif event.type == SDL_KEYUP:
             boy.frame = 0
             boy.speed = 0
@@ -300,7 +307,6 @@ def exit():
 
 def pause():
     pass
-
 
 def resume():
     pass
