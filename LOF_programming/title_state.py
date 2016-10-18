@@ -29,17 +29,17 @@ def handle_events():
 
 def draw():
     clear_canvas()
+
     image.draw(640, 360)
+
     update_canvas()
     pass
 
 def update():
     pass
 
-
 def pause():
     pass
-
 
 def resume():
     pass
