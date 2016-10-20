@@ -36,7 +36,7 @@ def update():
 
     #alpha_value = alpha_value + 10
 
-    if (logo_time > 0.5):
+    if (logo_time > 1.0):
         logo_time = 0
         # game_framework.quit()
         fun_push = fun_push + 1
@@ -44,6 +44,7 @@ def update():
     if fun_push < 2:
         delay(0.01)
         logo_time += 0.01
+
     if fun_push == 2:
         game_framework.push_state(title_state)
 def draw():

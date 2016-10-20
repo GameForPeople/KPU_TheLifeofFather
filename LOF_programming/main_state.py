@@ -7,15 +7,16 @@ from pico2d import *
 import game_framework
 import title_state
 
-MAGIC_X1 = 1380      # DISTANCE 가로등 1 ~ 가로등 2
-count_x1 = 0         # MAGIC_X1 측정
+
+SCREEN_X = 1280         #화면 X축 고정 크기
+SCREEN_Y = 720          #화면 Y축 고정 크기
+
+MAGIC_X1 = 1380      # DISTANCE 가로등 1 ~ 가로등 2 //절대좌표
 RESULT_X1 = 2190     # 2190 일때 MAP_MOVE 초기화
+count_x1 = 0         # MAGIC_X1 측정 -> 버그있으니 수정이 필요함 -> 플레이어의 컨트롤 권한을 뻇으면 해결할 수 있는 문제라고 생각됨
 
-SCREEN_X = 1280
-SCREEN_Y = 720
-
-BOY_SPEED = 3
-MAP_MOVE = 0
+BOY_SPEED = 3       # 남자 어른의 스피드는 3으로 설정합니다. -> 애기 1/2, 유치원 1, 남자 노인 2, 남자 어른 3, 학생 6
+MAP_MOVE = 0        # 맵의 움직임을 통해 카메라 연출 목적으로 사용됨
 
 name = "MainState"
 
@@ -31,8 +32,16 @@ boy = None
 back = None
 font = None
 object_light = None
+object_bus = None
 
-class Object_list:
+class object_bus:
+    def __init__(self):
+        self.x = - 150
+        self.y = 218
+
+    def draw(self):
+        
+class Object_light:
     def __init__(self):
         self.x = 795
         self.y = 218
@@ -67,6 +76,7 @@ class Object_list:
             if self.onoff_1_timer == 30:
                 self.onoff_1 = 1
                 GAME_VIEW = 3
+
 class Back:
     global MAP_MOVE
     global RESULT_X1
@@ -87,6 +97,8 @@ class Back:
             self.image.clip_draw_to_origin(0 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 6:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 7:
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
     def draw_front(self):
@@ -101,6 +113,8 @@ class Back:
         elif GAME_VIEW == 6:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
             #self.thanks_img.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 7:
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
         if grid_button == 1:
@@ -137,12 +151,16 @@ class Boy:
                 object_light.onoff_1 = 0
                 object_light.onoff_2 = 0
                 object_light.onoff_count = object_light.onoff_count + 1
-
                 self.x = 640
                 MAP_MOVE = 0
 
-        if GAME_VIEW == 5 or GAME_VIEW == 6:
+
+        if GAME_VIEW == 5:
             MAP_MOVE = MAP_MOVE + self.dir * self.speed
+        elif GAME_VIEW == 6:
+            MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 3)
+            if self.x == 950:
+                GAME_VIEW = 7
 
         if GAME_VIEW == 4 and self.x < 200 and self.speed:
             self.x = 200 #self.speed               #수정필요
@@ -158,9 +176,6 @@ class Boy:
             object_light.onoff_2 = 1
             object_light.onoff_count = object_light.onoff_count + 1
 
-    def max_XY(self): #??? 이 함수 어따쓰는거지??? 뭐야
-        if GAME_VIEW == 2 and self.x < 450:
-            self.x = 450
 
     def control_Y(self):
         if GAME_VIEW == 2:
@@ -194,7 +209,7 @@ class Boy:
                 self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
             elif self.dir == -1:
                 self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
-        elif GAME_VIEW == 5 or GAME_VIEW == 6:
+        elif GAME_VIEW == 5:
             if self.dir == 1:
                 self.image.clip_draw(self.frame * 80, 200, 70, 100, 640, self.y)
             elif self.dir == -1:
@@ -204,10 +219,15 @@ class Boy:
                 self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
             elif self.dir == -1:
                 self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+        elif GAME_VIEW == 7:
+            if self.dir == 1:
+                self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+            elif self.dir == -1:
+                self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
 
 
 def handle_view():
-    global view_change
+    global view_change, view_change_rate
     global GAME_VIEW
     global change_rate
     global change_balance
@@ -250,6 +270,7 @@ def handle_view():
                 change_balance = 9
            elif view_change == 19:
                 change_balance = 7
+
            view_change =  view_change + 1
 
         if view_change == change_rate:
@@ -267,7 +288,7 @@ def enter():
     global boy, back, object_light
     boy = Boy()
     back = Back()
-    object_light = Object_list()
+    object_light = Object_light()
 
 def handle_events():
     global boy
@@ -316,7 +337,6 @@ def resume():
 
 def update():
     boy.update()
-    boy.max_XY()
     boy.control_Y()
     object_light.update()
     handle_view()
