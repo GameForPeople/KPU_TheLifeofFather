@@ -19,7 +19,7 @@ MAP_MOVE = 0
 
 name = "MainState"
 
-GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐
+GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐 7일때, 화면 반으로 조절
 
 view_change = 0
 change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
@@ -89,7 +89,6 @@ class Back:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
-
     def draw_front(self):
         if GAME_VIEW == 0:
             self.image_front.clip_draw_to_origin(160,140, 580, 340, 0, 0, SCREEN_X, SCREEN_Y)
@@ -100,8 +99,8 @@ class Back:
         elif GAME_VIEW == 3 or GAME_VIEW == 4 or GAME_VIEW == 5:
             self.image_front.clip_draw_to_origin(0 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 6:
-            #self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
-            self.thanks_img.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            #self.thanks_img.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
         if grid_button == 1:
@@ -131,7 +130,7 @@ class Boy:
         if self.speed and self.frame_time % 5 == 0:     #조각을 결정합니다 . 5프레임 1번씩 이미지를 변환
             self.frame = self.frame % 6 + 1
 
-        if GAME_VIEW == 4 or GAME_VIEW == 5:            # 가로등과 가로등 사이에 거리를 체크합니다.
+        if GAME_VIEW == 3 or GAME_VIEW == 4 or GAME_VIEW == 5:            # 가로등과 가로등 사이에 거리를 체크합니다.
             count_x1 = count_x1 + self.dir * self.speed
             if GAME_VIEW == 5 and count_x1 >= MAGIC_X1 - 5 and count_x1 <= MAGIC_X1 + 5:
                 GAME_VIEW = 6

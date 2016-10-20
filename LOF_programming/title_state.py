@@ -5,12 +5,16 @@ from pico2d import *
 name = "TitleState"
 image = None
 bgm = None
+image_10 = None
+image_1 = None
 
 
 def enter():
-    global image, bgm
+    global image, bgm, image_1, image_10
 
-    image = load_image('title.png')
+    image = load_image('black_screen.png')
+    image_10 = load_image("story_1_10.png")
+    image_1 = load_image("story_1_1.png")
     bgm = Music('Main_BGM.wav')
 
     #bgm.play()
