@@ -27,6 +27,7 @@ change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
 change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
 
 grid_button = 0
+bus_button = 0
 
 boy = None
 back = None
@@ -34,13 +35,18 @@ font = None
 object_light = None
 object_bus = None
 
-class object_bus:
+class Object_bus:
     def __init__(self):
         self.x = - 150
-        self.y = 218
+        self.y = 188
+        self.image = load_image('BUS_1.png')
 
     def draw(self):
-        
+        self.image.draw(self.x, self.y, 372, 230)
+
+    def update(self):
+        self.x = self.x + 4
+
 class Object_light:
     def __init__(self):
         self.x = 795
@@ -58,6 +64,7 @@ class Object_light:
 
         if self.onoff_1 == 1:
             self.image.draw(self.x - MAP_MOVE , self.y, 262, 291)
+
 
         if self.onoff_2 == 1:
             self.image.draw(self.x + MAGIC_X1 - MAP_MOVE + 8, self.y, 262, 291)
@@ -135,6 +142,7 @@ class Boy:
         global object_light
         global count_x1
         global MAGIC_X1
+        global bus_button
 
         self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
 
@@ -159,8 +167,9 @@ class Boy:
             MAP_MOVE = MAP_MOVE + self.dir * self.speed
         elif GAME_VIEW == 6:
             MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 3)
-            if self.x == 950:
+            if self.x > 950 and self.x < 955:
                 GAME_VIEW = 7
+                bus_button = 1
 
         if GAME_VIEW == 4 and self.x < 200 and self.speed:
             self.x = 200 #self.speed               #수정필요
@@ -285,10 +294,11 @@ def handle_view():
             GAME_VIEW = 4
 
 def enter():
-    global boy, back, object_light
+    global boy, back, object_light, object_bus
     boy = Boy()
     back = Back()
     object_light = Object_light()
+    object_bus = Object_bus()
 
 def handle_events():
     global boy
@@ -324,10 +334,11 @@ def handle_events():
             boy.speed = 0
 
 def exit():
-    global boy, back, object_light
+    global boy, back, object_light, object_bus
     del (boy)
     del (back)
     del (object_light)
+    del (objcet_bus)
 
 def pause():
     pass
@@ -339,6 +350,9 @@ def update():
     boy.update()
     boy.control_Y()
     object_light.update()
+
+    if bus_button == 1:
+        object_bus.update()
     handle_view()
 
 def draw():
@@ -346,6 +360,10 @@ def draw():
     back.draw()
     boy.draw()
     object_light.draw()
+
+    if bus_button == 1:
+        object_bus.draw()
+
     back.draw_front()
     back.make_grid()
     update_canvas()
