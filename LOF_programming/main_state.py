@@ -22,6 +22,17 @@ name = "MainState"
 
 GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐 7일때, 화면 반으로 조절
 
+
+
+BUS_START_X = -150
+BUS_START_Y = 180
+BUS_SPEED = 4
+
+LIGHT_START_X = 795
+LIGHT_START_Y = 218
+LIGHT_ONOFF_SETTING = 0
+
+
 view_change = 0
 change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
 change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
@@ -37,25 +48,25 @@ object_bus = None
 
 class Object_bus:
     def __init__(self):
-        self.x = - 150
-        self.y = 188
+        self.x = BUS_START_X
+        self.y = BUS_START_Y
         self.image = load_image('BUS_1.png')
 
     def draw(self):
         self.image.draw(self.x, self.y, 372, 230)
 
     def update(self):
-        self.x = self.x + 4
+        self.x = self.x + BUS_SPEED
 
 class Object_light:
     def __init__(self):
-        self.x = 795
-        self.y = 218
-        self.onoff_1 = 0
-        self.onoff_1_timer = 0
-        self.onoff_2 = 0
-        self.onoff_3 = 0
-        self.onoff_count = 0
+        self.x = LIGHT_START_X
+        self.y = LIGHT_START_Y
+        self.onoff_1 = LIGHT_ONOFF_SETTING
+        self.onoff_1_timer = LIGHT_ONOFF_SETTING
+        self.onoff_2 = LIGHT_ONOFF_SETTING
+        self.onoff_3 = LIGHT_ONOFF_SETTING
+        self.onoff_count = LIGHT_ONOFF_SETTING
         self.image = load_image('Light_1.png')
 
     def draw(self):
