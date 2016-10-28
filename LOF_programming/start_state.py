@@ -8,7 +8,7 @@ name = "StartState"
 image = None
 image2 = None
 logo_time = 0.0
-fun_push = 0
+image_change = 0
 #alpha_value = 0
 
 SCREEN_X = 1280
@@ -31,7 +31,7 @@ def exit():
 
 def update():
     global logo_time
-    global fun_push
+    global image_change
     #global alpha_value
 
     #alpha_value = alpha_value + 10
@@ -39,23 +39,23 @@ def update():
     if (logo_time > 1.0):
         logo_time = 0
         # game_framework.quit()
-        fun_push = fun_push + 1
+        image_change = image_change + 1
 
-    if fun_push < 2:
+    if image_change < 2:
         delay(0.01)
         logo_time += 0.01
 
-    if fun_push == 2:
+    if image_change == 2:
         game_framework.push_state(title_state)
 def draw():
-    global image, image2, fun_push
+    global image, image2, image_change
    # global alpha_value
 
     clear_canvas()
 
-    if fun_push == 0:
+    if image_change == 0:
         image.clip_draw_to_origin(0, 0 , 600, 300, 0, 0, SCREEN_X, SCREEN_Y )
-    if fun_push == 1:
+    if image_change == 1:
         image2.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
     #image.opacify(100)
 
