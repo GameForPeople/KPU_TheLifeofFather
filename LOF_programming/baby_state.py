@@ -3,6 +3,11 @@ from pico2d import *
 
 name = "StartState"
 
+class baby:
+    def __init__(self):
+        x = 50
+        y = 50
+
 def enter():
     open_canvas()
 
