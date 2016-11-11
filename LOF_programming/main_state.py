@@ -26,7 +26,7 @@ GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때
 
 BUS_START_X = -150
 BUS_START_Y = 180
-BUS_SPEED = 4
+
 
 LIGHT_START_X = 795
 LIGHT_START_Y = 218
@@ -47,16 +47,35 @@ object_light = None
 object_bus = None
 
 class Object_bus:
+
     def __init__(self):
         self.x = BUS_START_X
         self.y = BUS_START_Y
+        self.timer = 0
+        self.speed = 6
         self.image = load_image('BUS_1.png')
 
     def draw(self):
         self.image.draw(self.x, self.y, 372, 230)
 
+    def stop(self):
+        self.speed = 0
+
+
     def update(self):
-        self.x = self.x + BUS_SPEED
+        global GAME_VIEW
+        self.x += self.speed
+        self.timer += 1
+
+        if self.x > 630 and self.x < 640:
+            GAME_VIEW = 8
+            self.timer = 0
+
+        if self.timer == 20 and GAME_VIEW == 8 and self.speed != 0:
+            self.speed -= 1
+            self.timer = 0
+
+
 
 class Object_light:
     def __init__(self):
@@ -117,6 +136,8 @@ class Back:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 7:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 8:
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
     def draw_front(self):
@@ -133,12 +154,16 @@ class Back:
             #self.thanks_img.clip_draw_to_origin(0, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 7:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 8:
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 class Boy:
+    image = None
+
     def __init__(self):
         self.x, self.y = 470, 195 #120
         self.speed = BOY_SPEED
@@ -146,7 +171,6 @@ class Boy:
         self.image = load_image('youngFather_character_sprite.png')
         self.dir = -1
         self.frame_time = 0
-
     def update(self):
         global MAP_MOVE
         global GAME_VIEW
@@ -177,8 +201,8 @@ class Boy:
         if GAME_VIEW == 5:
             MAP_MOVE = MAP_MOVE + self.dir * self.speed
         elif GAME_VIEW == 6:
-            MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 3)
-            if self.x > 950 and self.x < 955:
+            #MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 2 )
+            if self.x > 900 and self.x < 905:
                 GAME_VIEW = 7
                 bus_button = 1
 
@@ -244,6 +268,11 @@ class Boy:
                 self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
             elif self.dir == -1:
                 self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+        elif GAME_VIEW == 8:
+            if self.dir == 1:
+               self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+            elif self.dir == -1:
+               self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
 
 
 def handle_view():
@@ -304,8 +333,12 @@ def handle_view():
         if MAP_MOVE == 600:
             GAME_VIEW = 4
 
+    elif GAME_VIEW == 8:
+        MAP_MOVE += 2
+
 def enter():
     global boy, back, object_light, object_bus
+    open_canvas()
     boy = Boy()
     back = Back()
     object_light = Object_light()
@@ -349,7 +382,7 @@ def exit():
     del (boy)
     del (back)
     del (object_light)
-    del (objcet_bus)
+    del (object_bus)
 
 def pause():
     pass

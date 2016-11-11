@@ -23,8 +23,8 @@
       <file leaf-file-name="mygame.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mygame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -35,8 +35,8 @@
       <file leaf-file-name="start_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="12" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -44,21 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="baby_state.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baby_state.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="title_state.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="title_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/title_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#439#475#0" expanded="false" />
@@ -68,26 +58,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_state.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main_state.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="170" column="40" selection-start-line="170" selection-start-column="40" selection-end-line="170" selection-end-column="40" />
+            <state relative-caret-position="479">
+              <caret line="218" column="36" selection-start-line="218" selection-start-column="36" selection-end-line="218" selection-end-column="36" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#1002#1254#0" expanded="false" />
-                <element signature="e#1280#2337#0" expanded="false" />
-                <element signature="e#2355#4947#0" expanded="false" />
-                <element signature="e#4824#4947#0" expanded="false" />
-                <element signature="e#6961#7176#0" expanded="false" />
-                <element signature="e#7206#9476#0" expanded="false" />
-                <element signature="e#9502#11073#0" expanded="false" />
-                <element signature="e#9677#10932#0" expanded="false" />
-                <element signature="e#10891#10932#0" expanded="false" />
-                <element signature="e#10967#11073#0" expanded="false" />
-                <element signature="e#11092#11232#0" expanded="false" />
-                <element signature="e#11259#12245#0" expanded="false" />
-                <element signature="e#12263#12378#0" expanded="false" />
+                <element signature="e#1623#2680#0" expanded="false" />
+                <element signature="e#2767#2960#0" expanded="false" />
+                <element signature="e#5471#5594#0" expanded="false" />
+                <element signature="e#7627#7842#0" expanded="false" />
+                <element signature="e#10599#11854#0" expanded="false" />
+                <element signature="e#11813#11854#0" expanded="false" />
+                <element signature="e#12062#12220#0" expanded="false" />
+                <element signature="e#13251#13366#0" expanded="false" />
+                <element signature="e#13385#13389#0" expanded="false" />
+                <element signature="e#13409#13413#0" expanded="false" />
+                <element signature="e#13433#13562#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -96,8 +84,8 @@
       <file leaf-file-name="pico2d.py" pinned="false" current-in-tab="false">
         <entry file="file://D:/Python/Lib/site-packages/pico2d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6279">
-              <caret line="308" column="18" selection-start-line="308" selection-start-column="13" selection-end-line="308" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="262" column="26" selection-start-line="262" selection-start-column="26" selection-end-line="262" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -106,8 +94,8 @@
       <file leaf-file-name="game_framework.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_framework.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1239">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -126,12 +114,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/start.py" />
-        <option value="$PROJECT_DIR$/mygame.py" />
         <option value="D:/Python/Lib/site-packages/pico2d.py" />
         <option value="$PROJECT_DIR$/title_state.py" />
-        <option value="$PROJECT_DIR$/main_state.py" />
-        <option value="$PROJECT_DIR$/start_state.py" />
         <option value="$PROJECT_DIR$/baby_state.py" />
+        <option value="$PROJECT_DIR$/start_state.py" />
+        <option value="$PROJECT_DIR$/mygame.py" />
+        <option value="$PROJECT_DIR$/main_state.py" />
       </list>
     </option>
   </component>
@@ -166,6 +154,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -187,7 +176,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -371,25 +359,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2609375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31763417" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39978093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33515882" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -405,21 +393,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/start_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/title_state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
@@ -438,19 +416,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -509,19 +485,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -580,19 +554,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -651,19 +623,17 @@
           <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -745,19 +715,17 @@
           <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -768,19 +736,17 @@
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -831,19 +797,17 @@
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -906,36 +870,60 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/baby_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/youngFather_character_sprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/title_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#439#475#0" expanded="false" />
+            <element signature="e#502#867#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game_framework.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1239">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python/Lib/site-packages/pico2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="262" column="26" selection-start-line="262" selection-start-column="26" selection-end-line="262" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mygame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Python/Lib/site-packages/pico2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6279">
-          <caret line="308" column="18" selection-start-line="308" selection-start-column="13" selection-end-line="308" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/start_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="12" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -944,43 +932,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="170" column="40" selection-start-line="170" selection-start-column="40" selection-end-line="170" selection-end-column="40" />
+        <state relative-caret-position="479">
+          <caret line="218" column="36" selection-start-line="218" selection-start-column="36" selection-end-line="218" selection-end-column="36" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1002#1254#0" expanded="false" />
-            <element signature="e#1280#2337#0" expanded="false" />
-            <element signature="e#2355#4947#0" expanded="false" />
-            <element signature="e#4824#4947#0" expanded="false" />
-            <element signature="e#6961#7176#0" expanded="false" />
-            <element signature="e#7206#9476#0" expanded="false" />
-            <element signature="e#9502#11073#0" expanded="false" />
-            <element signature="e#9677#10932#0" expanded="false" />
-            <element signature="e#10891#10932#0" expanded="false" />
-            <element signature="e#10967#11073#0" expanded="false" />
-            <element signature="e#11092#11232#0" expanded="false" />
-            <element signature="e#11259#12245#0" expanded="false" />
-            <element signature="e#12263#12378#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baby_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/title_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#439#475#0" expanded="false" />
-            <element signature="e#502#867#0" expanded="false" />
+            <element signature="e#1623#2680#0" expanded="false" />
+            <element signature="e#2767#2960#0" expanded="false" />
+            <element signature="e#5471#5594#0" expanded="false" />
+            <element signature="e#7627#7842#0" expanded="false" />
+            <element signature="e#10599#11854#0" expanded="false" />
+            <element signature="e#11813#11854#0" expanded="false" />
+            <element signature="e#12062#12220#0" expanded="false" />
+            <element signature="e#13251#13366#0" expanded="false" />
+            <element signature="e#13385#13389#0" expanded="false" />
+            <element signature="e#13409#13413#0" expanded="false" />
+            <element signature="e#13433#13562#0" expanded="false" />
           </folding>
         </state>
       </provider>
