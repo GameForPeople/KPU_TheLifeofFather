@@ -39,6 +39,7 @@ change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변
 
 grid_button = 0
 bus_button = 0
+view_8_speed = 2
 
 boy = None
 back = None
@@ -64,6 +65,8 @@ class Object_bus:
 
     def update(self):
         global GAME_VIEW
+        global view_8_speed
+
         self.x += self.speed
         self.timer += 1
 
@@ -74,8 +77,13 @@ class Object_bus:
         if self.timer == 20 and GAME_VIEW == 8 and self.speed != 0:
             self.speed -= 1
             self.timer = 0
+         #   if(self.speed == 0):
 
 
+        if self.speed == 0:
+            self.x -= view_8_speed # 2는 맵무브 스피드!!!
+            if self.x == 640:
+                view_8_speed = 0
 
 class Object_light:
     def __init__(self):
@@ -178,6 +186,7 @@ class Boy:
         global count_x1
         global MAGIC_X1
         global bus_button
+        global view_8_speed
 
         self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
 
@@ -197,12 +206,11 @@ class Boy:
                 self.x = 640
                 MAP_MOVE = 0
 
-
         if GAME_VIEW == 5:
             MAP_MOVE = MAP_MOVE + self.dir * self.speed
         elif GAME_VIEW == 6:
             #MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 2 )
-            if self.x > 900 and self.x < 905:
+            if self.x > 1000 and self.x < 1005:
                 GAME_VIEW = 7
                 bus_button = 1
 
@@ -220,7 +228,8 @@ class Boy:
             object_light.onoff_2 = 1
             object_light.onoff_count = object_light.onoff_count + 1
 
-
+        elif GAME_VIEW == 8:
+            self.x -= view_8_speed
     def control_Y(self):
         if GAME_VIEW == 2:
             if self.x <= 595:
@@ -282,6 +291,7 @@ def handle_view():
     global change_balance
     global MAP_MOVE
     global boy
+    global view_8_speed
 
 
     if GAME_VIEW == 1:
@@ -334,7 +344,7 @@ def handle_view():
             GAME_VIEW = 4
 
     elif GAME_VIEW == 8:
-        MAP_MOVE += 2
+        MAP_MOVE += view_8_speed;
 
 def enter():
     global boy, back, object_light, object_bus
