@@ -42,6 +42,8 @@ change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변
 grid_button = 0
 bus_button = 0
 view_8_speed = 2
+view_9_speed = 2
+handle_count = 0
 
 boy = None
 back = None
@@ -111,6 +113,7 @@ class Object_bus:
     def update(self):
         global GAME_VIEW
         global view_8_speed
+        global MAP_MOVE
 
         self.x += self.speed
         self.timer += 1
@@ -179,8 +182,8 @@ class Back:
     global MAP_MOVE
     global RESULT_X1
     def __init__(self):
-        self.image = load_image('MAP_1.png')
-        self.image_front = load_image('MAP_1_front.png')
+        self.image = load_image('MAP_1_bus.png')
+        self.image_front = load_image('MAP_1_front_bus.png')
         self.grid_img = load_image('grid.png')
         self.thanks_img = load_image('thanksto.png')
 
@@ -199,6 +202,10 @@ class Back:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 8:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 9:
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 10:
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
     def draw_front(self):
@@ -216,6 +223,10 @@ class Back:
         elif GAME_VIEW == 7:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 8:
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 9:
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif GAME_VIEW == 10:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
@@ -351,7 +362,6 @@ class Boy:
                 elif self.dir == -1:
                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
 
-
 def handle_view():
     global view_change, view_change_rate
     global GAME_VIEW
@@ -360,7 +370,8 @@ def handle_view():
     global MAP_MOVE
     global boy
     global view_8_speed
-
+    global view_9_speed
+    global handle_count
 
     if GAME_VIEW == 1:
         if view_change < change_rate:
@@ -412,7 +423,22 @@ def handle_view():
             GAME_VIEW = 4
 
     elif GAME_VIEW == 8:
-        MAP_MOVE += view_8_speed;
+        MAP_MOVE += view_8_speed
+
+    elif GAME_VIEW == 9:
+        MAP_MOVE += view_9_speed
+        handle_count += 1
+
+        if handle_count == 10 or handle_count == 20:
+            view_9_speed += 1
+
+        if handle_count == 30 or handle_count == 40 :
+            view_9_speed += 3
+        # 마지막 카메라 하이라이트를 구현하자!!!!
+
+
+        if handle_count == 300:
+            GAME_VIEW = 10          #마지막 카메라 하이라이트를 구현하자!!!!
 
 def enter():
     global boy, back, object_light, object_bus, object_people
