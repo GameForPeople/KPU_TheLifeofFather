@@ -28,7 +28,7 @@ BUS_START_X = -150
 BUS_START_Y = 180
 
 PEOPLE_START_X = 2750
-PEOPLE_START_y = 55
+PEOPLE_START_y = 65
 
 LIGHT_START_X = 795
 LIGHT_START_Y = 218
@@ -87,10 +87,22 @@ class Object_bus:
         self.y = BUS_START_Y
         self.timer = 0
         self.speed = 6
+        self.timer_2 = 0
+        self.image_type = 0
         self.image = load_image('BUS_1.png')
+        self.image_2 = load_image('BUS_2.png')
+        self.image_3 = load_image('BUS_3.png')
+        self.image_4 = load_image('BUS_4.png')
 
     def draw(self):
-        self.image.draw(self.x, self.y, 372, 230)
+        if self.image_type == 0:
+            self.image.draw(self.x, self.y, 372, 230)
+        elif self.image_type == 1 or self.image_type == 2:
+            self.image_2.draw(self.x, self.y, 372, 230)
+        elif self.image_type == 3:
+            self.image_3.draw(self.x, self.y, 372, 230)
+        elif self.image_type == 4 or self.image_type == 5:
+            self.image_4.draw(self.x, self.y, 372, 230)
 
     def stop(self):
         self.speed = 0
@@ -112,6 +124,14 @@ class Object_bus:
             self.timer = 0
          #   if(self.speed == 0):
 
+        if self.speed == 0 and GAME_VIEW == 8:
+            self.timer_2 += 1
+
+            if self.timer_2 == 60:
+                self.timer_2 = 0
+                self.image_type += 1
+                if self.image_type == 5:
+                    GAME_VIEW = 9
 
         if self.speed == 0:
             self.x -= view_8_speed # 2는 맵무브 스피드!!!
@@ -214,6 +234,7 @@ class Boy:
         self.frame_time = 0
         self.timer = 0
         self.count = 0
+        self.draw_off = 0
 
     def update(self):
         global MAP_MOVE
@@ -234,10 +255,13 @@ class Boy:
             self.frame = self.frame % 6 + 1
         if object_bus.speed == 0:
             self.timer += 1
-            if self.timer == 60 and self.count < 3:
+            if self.timer == 60 and self.count < 4:
                 self.timer = 0
                 self.count += 1
                 self.x += 75
+
+            if self.count == 4:
+                self.draw_off = 1
 
         if GAME_VIEW == 3 or GAME_VIEW == 4 or GAME_VIEW == 5:            # 가로등과 가로등 사이에 거리를 체크합니다.
             count_x1 = count_x1 + self.dir * self.speed
@@ -285,47 +309,47 @@ class Boy:
 
     def draw(self):
         #self.print(self.x , self.y)
-
-        if GAME_VIEW == 0:
-            if self.dir == 1:
-                self.image.clip_draw_to_origin(self.frame * 80, 200, 70, 100, 595, 25, 150, 220)
-            elif self.dir == -1:
-                self.image.clip_draw_to_origin(self.frame * 80, 0, 70, 100, 595, 25, 150, 220)
-        elif GAME_VIEW == 1:
-            if self.dir == 1:
-                self.image.clip_draw_to_origin(self.frame * 80, 200, 70, 100, 595 - change_balance -(int)(160 / change_rate)*view_change, 25 + (int)(120 / change_rate)* view_change, 150 - (int)(80 / change_rate)* view_change, 220 - (int)(120 / change_rate)* view_change )
-            elif self.dir == -1:
-                self.image.clip_draw_to_origin(self.frame * 80, 0, 70, 100, 595 - change_balance - (int)(160 / change_rate)*view_change, 25 + (int)(120 / change_rate)* view_change, 150 - (int)(80 / change_rate)* view_change, 220 - (int)(120 / change_rate)* view_change )
-        elif GAME_VIEW == 2:
-            if self.dir == 1:
-                self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y) # 470, 195
-            elif self.dir == -1:
-                self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y) # 470, 195
-        elif GAME_VIEW == 3 or GAME_VIEW == 4:
-            if self.dir == 1:
-                self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
-            elif self.dir == -1:
-                self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
-        elif GAME_VIEW == 5:
-            if self.dir == 1:
-                self.image.clip_draw(self.frame * 80, 200, 70, 100, 640, self.y)
-            elif self.dir == -1:
-                self.image.clip_draw(self.frame * 80, 0, 70, 100, 640, self.y)
-        elif GAME_VIEW == 6:
-            if self.dir == 1:
-                self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
-            elif self.dir == -1:
-                self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
-        elif GAME_VIEW == 7:
-            if self.dir == 1:
-                self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
-            elif self.dir == -1:
-                self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
-        elif GAME_VIEW == 8:
-            if self.dir == 1:
-               self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
-            elif self.dir == -1:
-               self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+        if  self.draw_off == 0:
+            if GAME_VIEW == 0:
+                if self.dir == 1:
+                    self.image.clip_draw_to_origin(self.frame * 80, 200, 70, 100, 595, 25, 150, 220)
+                elif self.dir == -1:
+                    self.image.clip_draw_to_origin(self.frame * 80, 0, 70, 100, 595, 25, 150, 220)
+            elif GAME_VIEW == 1:
+                if self.dir == 1:
+                    self.image.clip_draw_to_origin(self.frame * 80, 200, 70, 100, 595 - change_balance -(int)(160 / change_rate)*view_change, 25 + (int)(120 / change_rate)* view_change, 150 - (int)(80 / change_rate)* view_change, 220 - (int)(120 / change_rate)* view_change )
+                elif self.dir == -1:
+                    self.image.clip_draw_to_origin(self.frame * 80, 0, 70, 100, 595 - change_balance - (int)(160 / change_rate)*view_change, 25 + (int)(120 / change_rate)* view_change, 150 - (int)(80 / change_rate)* view_change, 220 - (int)(120 / change_rate)* view_change )
+            elif GAME_VIEW == 2:
+                if self.dir == 1:
+                    self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y) # 470, 195
+                elif self.dir == -1:
+                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y) # 470, 195
+            elif GAME_VIEW == 3 or GAME_VIEW == 4:
+                if self.dir == 1:
+                    self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+                elif self.dir == -1:
+                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+            elif GAME_VIEW == 5:
+                if self.dir == 1:
+                    self.image.clip_draw(self.frame * 80, 200, 70, 100, 640, self.y)
+                elif self.dir == -1:
+                    self.image.clip_draw(self.frame * 80, 0, 70, 100, 640, self.y)
+            elif GAME_VIEW == 6:
+                if self.dir == 1:
+                    self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+                elif self.dir == -1:
+                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+            elif GAME_VIEW == 7:
+                if self.dir == 1:
+                    self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+                elif self.dir == -1:
+                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+            elif GAME_VIEW == 8:
+                if self.dir == 1:
+                   self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
+                elif self.dir == -1:
+                   self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
 
 
 def handle_view():
