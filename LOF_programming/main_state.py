@@ -27,6 +27,8 @@ GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때
 BUS_START_X = -150
 BUS_START_Y = 180
 
+PEOPLE_START_X = 2750
+PEOPLE_START_y = 55
 
 LIGHT_START_X = 795
 LIGHT_START_Y = 218
@@ -46,6 +48,37 @@ back = None
 font = None
 object_light = None
 object_bus = None
+object_people = None
+
+
+class Object_people:
+    def __init__(self):
+        self.x = PEOPLE_START_X
+        self.y = PEOPLE_START_y
+        self.timer = 0
+        self.image = load_image('people_1.png')
+        self.clipping = 0
+
+    def draw(self):
+        #self.image.draw(self.x, self.y, 152, 117)
+        self.image.clip_draw_to_origin(0, 0, 152 - self.clipping, 117, self.x, self.y)
+    def update(self):
+        global boy
+        global object_bus
+
+        if GAME_VIEW == 5:
+            self.x = 2750 - boy.x  #boy.dir * BOY_SPEED
+
+        if GAME_VIEW == 8:
+            self.x -= view_8_speed
+
+        if object_bus.speed == 0:
+            self.timer += 1
+
+            if self.timer == 60:
+                self.timer = 0
+                self.clipping += 50
+                self.x += 50
 
 class Object_bus:
 
@@ -179,10 +212,14 @@ class Boy:
         self.image = load_image('youngFather_character_sprite.png')
         self.dir = -1
         self.frame_time = 0
+        self.timer = 0
+        self.count = 0
+
     def update(self):
         global MAP_MOVE
         global GAME_VIEW
         global object_light
+        global object_bus
         global count_x1
         global MAGIC_X1
         global bus_button
@@ -195,6 +232,12 @@ class Boy:
 
         if self.speed and self.frame_time % 5 == 0:     #조각을 결정합니다 . 5프레임 1번씩 이미지를 변환
             self.frame = self.frame % 6 + 1
+        if object_bus.speed == 0:
+            self.timer += 1
+            if self.timer == 60 and self.count < 3:
+                self.timer = 0
+                self.count += 1
+                self.x += 75
 
         if GAME_VIEW == 3 or GAME_VIEW == 4 or GAME_VIEW == 5:            # 가로등과 가로등 사이에 거리를 체크합니다.
             count_x1 = count_x1 + self.dir * self.speed
@@ -208,6 +251,7 @@ class Boy:
 
         if GAME_VIEW == 5:
             MAP_MOVE = MAP_MOVE + self.dir * self.speed
+
         elif GAME_VIEW == 6:
             #MAP_MOVE = MAP_MOVE + (int)(self.dir * self.speed / 2 )
             if self.x > 1000 and self.x < 1005:
@@ -347,12 +391,13 @@ def handle_view():
         MAP_MOVE += view_8_speed;
 
 def enter():
-    global boy, back, object_light, object_bus
+    global boy, back, object_light, object_bus, object_people
     open_canvas()
     boy = Boy()
     back = Back()
     object_light = Object_light()
     object_bus = Object_bus()
+    object_people = Object_people()
 
 def handle_events():
     global boy
@@ -404,6 +449,7 @@ def update():
     boy.update()
     boy.control_Y()
     object_light.update()
+    object_people.update()
 
     if bus_button == 1:
         object_bus.update()
@@ -412,6 +458,7 @@ def update():
 def draw():
     clear_canvas()
     back.draw()
+    object_people.draw()
     boy.draw()
     object_light.draw()
 
