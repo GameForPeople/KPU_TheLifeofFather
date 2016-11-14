@@ -207,7 +207,6 @@ class Back:
         elif GAME_VIEW == 10:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
-
     def draw_front(self):
         if GAME_VIEW == 0:
             self.image_front.clip_draw_to_origin(160,140, 580, 340, 0, 0, SCREEN_X, SCREEN_Y)
@@ -232,6 +231,7 @@ class Back:
     def make_grid(self):
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+
 
 class Boy:
     image = None
@@ -500,6 +500,8 @@ def update():
     boy.control_Y()
     object_light.update()
     object_people.update()
+    print (GAME_VIEW)
+
 
     if bus_button == 1:
         object_bus.update()
@@ -508,6 +510,8 @@ def update():
 def draw():
     clear_canvas()
     back.draw()
+    back.draw_busback()
+
     object_people.draw()
     boy.draw()
     object_light.draw()
