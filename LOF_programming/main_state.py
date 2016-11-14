@@ -104,7 +104,12 @@ class Object_bus:
         elif self.image_type == 3:
             self.image_3.draw(self.x, self.y, 372, 230)
         elif self.image_type == 4 or self.image_type == 5:
-            self.image_4.draw(self.x, self.y, 372, 230)
+            if GAME_VIEW > 8:
+                self.image_4.clip_draw_to_origin(0,0, 372, 230, self.x - handle_count * 3, (int)(self.y / 2) - (int)(handle_count / 4), 372 + 4 * handle_count, 230 + 2*handle_count)
+                #self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
+
+            else:
+                self.image_4.draw(self.x, self.y, 372, 230)
 
     def stop(self):
         self.speed = 0
@@ -188,6 +193,8 @@ class Back:
         self.thanks_img = load_image('thanksto.png')
 
     def draw(self):
+        global handle_count
+
         if GAME_VIEW == 0:
             self.image.clip_draw_to_origin(160,140, 580, 340, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 1:
@@ -203,9 +210,9 @@ class Back:
         elif GAME_VIEW == 8:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 9:
-            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 10:
-            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count,0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
     def draw_front(self):
         if GAME_VIEW == 0:
@@ -224,9 +231,9 @@ class Back:
         elif GAME_VIEW == 8:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 9:
-            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 10:
-            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
         if grid_button == 1:
@@ -432,12 +439,13 @@ def handle_view():
         if handle_count == 10 or handle_count == 20:
             view_9_speed += 1
 
-        if handle_count == 30 or handle_count == 40 :
-            view_9_speed += 3
+        # 속도가 너무 빠르면 맵밖으로 나갈 수 있어서 안됨!!
+       # if handle_count == 30 or handle_count == 40 :
+        #    view_9_speed += 3
         # 마지막 카메라 하이라이트를 구현하자!!!!
 
 
-        if handle_count == 300:
+        if handle_count == 200:
             GAME_VIEW = 10          #마지막 카메라 하이라이트를 구현하자!!!!
 
 def enter():
@@ -510,7 +518,6 @@ def update():
 def draw():
     clear_canvas()
     back.draw()
-    back.draw_busback()
 
     object_people.draw()
     boy.draw()
