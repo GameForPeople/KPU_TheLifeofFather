@@ -23,7 +23,6 @@ name = "MainState"
 GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐 7일때, 화면 반으로 조절
 
 
-
 BUS_START_X = -150
 BUS_START_Y = 180
 
@@ -474,7 +473,7 @@ def handle_view():
         time_check += 1
         #print(time_check)      600까지 쓸수 있음 r고마워!!
 
-        if time_check >= 600:
+        if time_check >= 200:
             GAME_VIEW = 11
 
     elif GAME_VIEW == 11:
@@ -483,7 +482,7 @@ def handle_view():
 
 def enter():
     global boy, back, object_light, object_bus, object_people
-    open_canvas()
+    #open_canvas()
     boy = Boy()
     back = Back()
     object_light = Object_light()
