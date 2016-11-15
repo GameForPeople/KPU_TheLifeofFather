@@ -2,26 +2,30 @@ import game_framework
 import main_state
 from pico2d import *
 
-
 name = "TitleState"
 image = None
+back_1 = None
 bgm = None
 image_10 = None
 image_1 = None
+first_screen = None
 
 draw_count = 0
 draw_dir = 1
 num_10 = 0
 num_1 = 0
-
+black_count = 50
+black_1_count = 100
 def enter():
-    global image, bgm, image_1, image_10
+    global image, bgm, image_1, image_10, back_1, first_screen
 
-    image = load_image('black_screen.png')
+    image = load_image('black_screen_10.png')
+    back_1 = load_image('black_screen_1.png')
     image_10 = load_image("story_1_10.png")
     image_1 = load_image("story_1_1.png")
-    bgm = Music('Main_BGM.wav')
-
+    first_screen = load_image("first_screen.png")
+    #bgm = Music('Main_BGM.wav')
+    #bgm.set_volume(99)
     #bgm.play()
 
 def exit():
@@ -39,14 +43,16 @@ def handle_events():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                game_framework.change_state(main_state)
-
+                pass
 def draw():
 
-    global num_10, num_1, draw_count, draw_dir
+    global num_10, num_1, draw_count, draw_dir, black_count, back_1, first_screen
     clear_canvas()
 
-    image.draw(640, 360)
+    first_screen.draw(640, 360)             # 사기치는 이미지!!!
+
+    for i in range(0, black_count, 1):
+        image.draw(640, 360)
 
     if draw_count >= 0:
 
@@ -65,10 +71,15 @@ def draw():
             draw_dir = -1                   #어두워져라 얍!
 
     update_canvas()
-    pass
 
 def update():
-    pass
+    global draw_dir, draw_count, black_count
+
+    if draw_dir == -1 and draw_count < 100 and draw_count % 2 == 1:
+        black_count -= 1
+
+    if draw_dir == -1 and draw_count == 0:
+        game_framework.change_state(main_state)
 
 def pause():
     pass

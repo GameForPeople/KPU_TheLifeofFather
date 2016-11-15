@@ -44,6 +44,7 @@ bus_button = 0
 view_8_speed = 2
 view_9_speed = 2
 handle_count = 0
+time_check = 0
 
 boy = None
 back = None
@@ -105,7 +106,7 @@ class Object_bus:
             self.image_3.draw(self.x, self.y, 372, 230)
         elif self.image_type == 4 or self.image_type == 5:
             if GAME_VIEW > 8:
-                self.image_4.clip_draw_to_origin(0,0, 372, 230, self.x - handle_count * 3, (int)(self.y / 2) - (int)(handle_count / 4), 372 + 4 * handle_count, 230 + 2*handle_count)
+                self.image_4.clip_draw_to_origin(0,0, 372, 230, self.x - 186 - handle_count * 2, self.y - 115 - (int)(handle_count / 8), 372 + 4 * handle_count, 230 + 2*handle_count)
                 #self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
             else:
@@ -190,8 +191,24 @@ class Back:
         self.image = load_image('MAP_1_bus.png')
         self.image_front = load_image('MAP_1_front_bus.png')
         self.grid_img = load_image('grid.png')
+        self.black_down = load_image('black_down_animation.png')
+        self.black_down_timer = 0
+        self.black_down_screen = 1
+
         self.thanks_img = load_image('thanksto.png')
 
+
+    def black_down_animation(self):
+        self.black_down.clip_draw_to_origin(0, 0 + self.black_down_timer, 1280, 720 + self.black_down_timer, 0, 720 - self.black_down_screen , 1280, self.black_down_screen)
+    def black_down_animation_tiemr(self):
+        global GAME_VIEW
+
+        if GAME_VIEW == 11:
+            if self.black_down_timer < 1440:
+                self.black_down_timer += 20
+
+            if self.black_down_screen < 720:
+                self.black_down_screen += 20
     def draw(self):
         global handle_count
 
@@ -211,7 +228,7 @@ class Back:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 9:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
-        elif GAME_VIEW == 10:
+        elif GAME_VIEW >= 10:
             self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count,0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
     def draw_front(self):
@@ -232,7 +249,7 @@ class Back:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif GAME_VIEW == 9:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
-        elif GAME_VIEW == 10:
+        elif GAME_VIEW >= 10:
             self.image_front.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
     def make_grid(self):
@@ -245,11 +262,12 @@ class Boy:
 
     def __init__(self):
         self.x, self.y = 470, 195 #120
-        self.speed = BOY_SPEED
+        self.speed = 0
         self.frame = 0
         self.image = load_image('youngFather_character_sprite.png')
         self.dir = -1
         self.frame_time = 0
+        self.frame_off = 0
         self.timer = 0
         self.count = 0
         self.draw_off = 0
@@ -326,8 +344,9 @@ class Boy:
                 self.y = 120
 
     def draw(self):
+
         #self.print(self.x , self.y)
-        if  self.draw_off == 0:
+        if self.draw_off == 0:
             if GAME_VIEW == 0:
                 if self.dir == 1:
                     self.image.clip_draw_to_origin(self.frame * 80, 200, 70, 100, 595, 25, 150, 220)
@@ -379,6 +398,7 @@ def handle_view():
     global view_8_speed
     global view_9_speed
     global handle_count
+    global time_check
 
     if GAME_VIEW == 1:
         if view_change < change_rate:
@@ -448,6 +468,19 @@ def handle_view():
         if handle_count == 200:
             GAME_VIEW = 10          #마지막 카메라 하이라이트를 구현하자!!!!
 
+
+    elif GAME_VIEW == 10:
+        MAP_MOVE += view_9_speed
+        time_check += 1
+        #print(time_check)      600까지 쓸수 있음 r고마워!!
+
+        if time_check >= 600:
+            GAME_VIEW = 11
+
+    elif GAME_VIEW == 11:
+        MAP_MOVE += view_9_speed
+
+
 def enter():
     global boy, back, object_light, object_bus, object_people
     open_canvas()
@@ -508,9 +541,9 @@ def update():
     boy.control_Y()
     object_light.update()
     object_people.update()
+
     print (GAME_VIEW)
-
-
+    back.black_down_animation_tiemr()
     if bus_button == 1:
         object_bus.update()
     handle_view()
@@ -527,6 +560,7 @@ def draw():
         object_bus.draw()
 
     back.draw_front()
+    back.black_down_animation()
     back.make_grid()
     update_canvas()
 
