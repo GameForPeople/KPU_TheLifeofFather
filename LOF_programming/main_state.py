@@ -59,34 +59,69 @@ class Dialog:
         self.y = 500
         self.count = 1
         self.time_count = 0
-        self.image_1 = load_image('dialog_1.png')
+        self.image_1 = load_image('dialog_2.png')
+        self.image_2 = load_image('dialog_1.png')
+        self.image_3 = load_image('dialog_3.png')
+        self.image_4 = load_image('dialog_4.png')
         self.button = 0
         self.timing = 0
 
     def update(self):
+        global GAME_VIEW, boy, view_change
+        if self.button == 0:
+            self.timing += 1
 
-        self.timing += 1
+        if GAME_VIEW == 4 and self.timing > 50:    #GAME_VIEW 가 4일떄 다음 다이얼로그를 띄워야하므로! 타이밍 지수를 초기화해줌!
+            self.timing = 0
+        #print(self.timing)
 
-        if self.count == 1 and self.timing == 10:
+        if self.count == 1 and self.timing == 10 and self.time_count == 0:
             self.button = 1
+            self.timing = 0
+
+        elif self.count == 2 and self.timing == 10 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+
+        elif self.count == 3 and self.timing == 10 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+
+        elif GAME_VIEW == 4 and self.count == 4 and self.timing == 10 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+            self.y = 200
+            self.x = 440
 
         if self.button == 1:
             self.time_count += 1
 
-            if self.time_count == 100:
+
+            if self.time_count >= 80:
                 self.button = 2
+
         elif self.button == 2:
             self.time_count -= 1
 
-            if self.time_count == 0:
+            if self.time_count <= 0:  #조작하고 싶으면 여기서 하셔!!!
+                if self.count == 3:
+                    if GAME_VIEW < 2:
+                        view_change = view_change + 1
+                        if GAME_VIEW == 0:
+                            GAME_VIEW = GAME_VIEW + 1
                 self.count += 1
-                self.button = 0 # 조작하고 싶으면 여기서 하셔!!!
+                self.button = 0
 
     def draw(self):
         for i in range( 1, (int)((self.time_count) / 5) , 1):
             if self.count == 1:
                 self.image_1.draw(self.x, self.y, 1000, 200)
-
+            elif self.count == 2:
+                self.image_2.draw(self.x, self.y, 1000, 200)
+            elif self.count == 3:
+                self.image_3.draw(self.x, self.y, 1000, 200)
+            elif self.count == 4:
+                self.image_4.draw(self.x, self.y, 1000, 200)
 
 class Object_people:
     def __init__(self):
@@ -536,10 +571,6 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN:
-            if GAME_VIEW < 2:
-                view_change = view_change + 1
-                if GAME_VIEW == 0:
-                    GAME_VIEW = GAME_VIEW + 1
             if event.key == SDLK_LEFT:
                 boy.dir = -1
                 boy.speed = BOY_SPEED
