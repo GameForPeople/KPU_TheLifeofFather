@@ -38,7 +38,7 @@ view_change = 0
 change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
 change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
 
-grid_button = 0
+grid_button = 1
 bus_button = 0
 view_8_speed = 2
 view_9_speed = 2
@@ -48,9 +48,44 @@ time_check = 0
 boy = None
 back = None
 font = None
+dialog = None
 object_light = None
 object_bus = None
 object_people = None
+
+class Dialog:
+    def __init__(self):
+        self.x = 640
+        self.y = 500
+        self.count = 1
+        self.time_count = 0
+        self.image_1 = load_image('dialog_1.png')
+        self.button = 0
+        self.timing = 0
+
+    def update(self):
+
+        self.timing += 1
+
+        if self.count == 1 and self.timing == 10:
+            self.button = 1
+
+        if self.button == 1:
+            self.time_count += 1
+
+            if self.time_count == 100:
+                self.button = 2
+        elif self.button == 2:
+            self.time_count -= 1
+
+            if self.time_count == 0:
+                self.count += 1
+                self.button = 0 # 조작하고 싶으면 여기서 하셔!!!
+
+    def draw(self):
+        for i in range( 1, (int)((self.time_count) / 5) , 1):
+            if self.count == 1:
+                self.image_1.draw(self.x, self.y, 1000, 200)
 
 
 class Object_people:
@@ -481,13 +516,14 @@ def handle_view():
 
 
 def enter():
-    global boy, back, object_light, object_bus, object_people
-    #open_canvas()
+    global boy, back, object_light, object_bus, object_people, dialog
+    open_canvas()
     boy = Boy()
     back = Back()
     object_light = Object_light()
     object_bus = Object_bus()
     object_people = Object_people()
+    dialog = Dialog()
 
 def handle_events():
     global boy
@@ -540,6 +576,7 @@ def update():
     boy.control_Y()
     object_light.update()
     object_people.update()
+    dialog.update()
 
     print (GAME_VIEW)
     back.black_down_animation_tiemr()
@@ -559,6 +596,7 @@ def draw():
         object_bus.draw()
 
     back.draw_front()
+    dialog.draw()
     back.black_down_animation()
     back.make_grid()
     update_canvas()
