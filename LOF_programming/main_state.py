@@ -23,6 +23,7 @@ name = "MainState"
 GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐 7일때, 화면 반으로 조절
 
 
+
 BUS_START_X = -150
 BUS_START_Y = 180
 
@@ -38,7 +39,7 @@ view_change = 0
 change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
 change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
 
-grid_button = 1
+grid_button = 0
 bus_button = 0
 view_8_speed = 2
 view_9_speed = 2
@@ -48,6 +49,7 @@ time_check = 0
 boy = None
 back = None
 font = None
+bgm = None
 dialog = None
 object_light = None
 object_bus = None
@@ -63,8 +65,14 @@ class Dialog:
         self.image_2 = load_image('dialog_1.png')
         self.image_3 = load_image('dialog_3.png')
         self.image_4 = load_image('dialog_4.png')
+        self.image_5 = load_image('dialog_5.png')
+        self.image_6 = load_image('dialog_6.png')
+        self.image_7 = load_image('dialog_7.png')
+        self.image_8 = load_image('dialog_8.png')
+
         self.button = 0
         self.timing = 0
+        self.x_5 = 0
 
     def update(self):
         global GAME_VIEW, boy, view_change
@@ -73,7 +81,14 @@ class Dialog:
 
         if GAME_VIEW == 4 and self.timing > 50:    #GAME_VIEW 가 4일떄 다음 다이얼로그를 띄워야하므로! 타이밍 지수를 초기화해줌!
             self.timing = 0
-        #print(self.timing)
+
+        elif GAME_VIEW == 5 and self.timing > 50:    #GAME_VIEW 가 4일떄 다음 다이얼로그를 띄워야하므로! 타이밍 지수를 초기화해줌!
+            self.timing = 0
+
+        elif GAME_VIEW == 9 and self.timing > 300:    #GAME_VIEW 가 4일떄 다음 다이얼로그를 띄워야하므로! 타이밍 지수를 초기화해줌!
+            self.timing = 0
+
+        ##print(self.timing)
 
         if self.count == 1 and self.timing == 10 and self.time_count == 0:
             self.button = 1
@@ -93,6 +108,34 @@ class Dialog:
             self.y = 200
             self.x = 440
 
+        elif GAME_VIEW == 5 and self.count == 5 and self.timing >= 5 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+            self.y = 200
+            self.x_5 = 750
+
+        elif GAME_VIEW == 5 and self.count == 6 and self.timing >= 10 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+            self.y = 200
+            self.x_5 = 750
+
+        elif GAME_VIEW == 9 and self.count == 7 and self.timing >= 150 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+            self.y = 350
+            self.x = 640
+
+        elif GAME_VIEW == 10 and self.count == 8 and self.timing >= 50 and self.time_count == 0:
+            self.button = 1
+            self.timing = 0
+            self.y = 350
+            self.x = 640
+
+        if self.button > 0:
+            if GAME_VIEW == 5:
+                self.x_5 += boy.speed * (-1) * boy.dir
+
         if self.button == 1:
             self.time_count += 1
 
@@ -109,6 +152,8 @@ class Dialog:
                         view_change = view_change + 1
                         if GAME_VIEW == 0:
                             GAME_VIEW = GAME_VIEW + 1
+                if self.count == 8:
+                    GAME_VIEW = 11
                 self.count += 1
                 self.button = 0
 
@@ -122,6 +167,15 @@ class Dialog:
                 self.image_3.draw(self.x, self.y, 1000, 200)
             elif self.count == 4:
                 self.image_4.draw(self.x, self.y, 1000, 200)
+            elif self.count == 5:
+                self.image_5.draw(self.x_5, self.y, 1000, 200)
+            elif self.count == 6:
+                self.image_6.draw(self.x_5, self.y, 1000, 200)
+            elif self.count == 7:
+                self.image_7.draw(self.x, self.y, 1000, 200)
+            elif self.count == 8:
+                self.image_8.draw(self.x, self.y, 1000, 200)
+
 
 class Object_people:
     def __init__(self):
@@ -543,7 +597,7 @@ def handle_view():
         time_check += 1
         #print(time_check)      600까지 쓸수 있음 r고마워!!
 
-        if time_check >= 200:
+        if time_check >= 600:       #객체화를 통해 굳이 쓸모가 없어져버렷음!
             GAME_VIEW = 11
 
     elif GAME_VIEW == 11:
@@ -551,14 +605,18 @@ def handle_view():
 
 
 def enter():
-    global boy, back, object_light, object_bus, object_people, dialog
-    open_canvas()
+    global boy, back, object_light, object_bus, object_people, dialog, bgm
+    #open_canvas()
     boy = Boy()
     back = Back()
     object_light = Object_light()
     object_bus = Object_bus()
     object_people = Object_people()
     dialog = Dialog()
+
+    bgm = load_music('Main_BGM.wav')
+    bgm.play()
+
 
 def handle_events():
     global boy
@@ -571,12 +629,13 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN:
-            if event.key == SDLK_LEFT:
-                boy.dir = -1
-                boy.speed = BOY_SPEED
-            elif event.key == SDLK_RIGHT:
-                boy.dir = 1
-                boy.speed = BOY_SPEED
+            if GAME_VIEW != 0 and GAME_VIEW != 1 and GAME_VIEW != 3:
+                if event.key == SDLK_LEFT:
+                    boy.dir = -1
+                    boy.speed = BOY_SPEED
+                elif event.key == SDLK_RIGHT:
+                    boy.dir = 1
+                    boy.speed = BOY_SPEED
             elif event.key == SDLK_ESCAPE:
                 game_framework.change_state(title_state)
             elif event.key == SDLK_g:
@@ -609,7 +668,7 @@ def update():
     object_people.update()
     dialog.update()
 
-    print (GAME_VIEW)
+    #print (GAME_VIEW)
     back.black_down_animation_tiemr()
     if bus_button == 1:
         object_bus.update()

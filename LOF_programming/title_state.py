@@ -5,7 +5,6 @@ from pico2d import *
 name = "TitleState"
 image = None
 back_1 = None
-bgm = None
 image_10 = None
 image_1 = None
 first_screen = None
@@ -41,14 +40,18 @@ def enter():
     image_10 = load_image("story_1_10.png")
     image_1 = load_image("story_1_1.png")
     first_screen = load_image("first_screen.png")
-    #bgm = Music('Main_BGM.wav')
-    #bgm.set_volume(99)
-    #bgm.play()
 
 def exit():
-    global image
+    global image, back_1, image_10, image_1, first_screen, chapter_1, chapter_10
+
     del(image)
-    pass
+    del(back_1)
+    del(image_10)
+    del(image_1)
+    del(first_screen)
+    del(chapter_1)
+    del(chapter_10)
+
 
 def handle_events():
     events = get_events()
@@ -65,6 +68,7 @@ def draw():
 
     global num_10, num_1, draw_count, draw_dir, black_count, back_1, first_screen, num_10_chapter, num_1_chapter, \
         draw_count_chapter, draw_dir_chapter, turn_check, chapter_1, chapter_10
+
     clear_canvas()
 
     first_screen.draw(640, 360)             # 사기치는 이미지!!!

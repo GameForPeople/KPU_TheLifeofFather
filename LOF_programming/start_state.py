@@ -24,9 +24,10 @@ def enter():
 
 
 def exit():
-    global image
+    global image, image2
+    del (image2)
     del (image)
-    close_canvas()
+    #close_canvas()
 
 
 def update():
