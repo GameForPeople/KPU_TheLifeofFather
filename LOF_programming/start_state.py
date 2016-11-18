@@ -16,7 +16,6 @@ SCREEN_Y = 720
 
 def enter():
     global image, image2
-    open_canvas()
     image = load_image('WarpLogo.png')
     image2 = load_image('DESIGNEDBY.png')
     #image_1 = load_image()

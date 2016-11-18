@@ -8,8 +8,8 @@ import game_framework
 import title_state
 
 
-SCREEN_X = 1280         #화면 X축 고정 크기
-SCREEN_Y = 720          #화면 Y축 고정 크기
+SCREEN_X = 1280         # 화면 X축 고정 크기
+SCREEN_Y = 720          # 화면 Y축 고정 크기
 
 MAGIC_X1 = 1380      # DISTANCE 가로등 1 ~ 가로등 2 //절대좌표
 RESULT_X1 = 2190     # 2190 일때 MAP_MOVE 초기화
@@ -36,8 +36,8 @@ LIGHT_ONOFF_SETTING = 0
 
 
 view_change = 0
-change_rate = 20    #바꿀시 오작동!!! 무조건 20고정
-change_balance = 5  #가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
+change_rate = 20    # 바꿀시 오작동!!! 무조건 20고정
+change_balance = 5  # 가로 비율 속도 차치에 따른 어쩔 수 없는 변수 의 초기값!! 바꿀시 오작동!!
 
 grid_button = 0
 bus_button = 0
@@ -615,7 +615,7 @@ def enter():
     dialog = Dialog()
 
     bgm = load_music('Main_BGM.wav')
-    bgm.play()
+   #bgm.play()
 
 
 def handle_events():
@@ -636,7 +636,8 @@ def handle_events():
                 elif event.key == SDLK_RIGHT:
                     boy.dir = 1
                     boy.speed = BOY_SPEED
-            elif event.key == SDLK_ESCAPE:
+
+            if event.key == SDLK_ESCAPE:
                 game_framework.change_state(title_state)
             elif event.key == SDLK_g:
                 if grid_button == 0:
