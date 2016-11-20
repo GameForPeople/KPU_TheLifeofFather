@@ -16,8 +16,8 @@ SCREEN_Y = 720
 
 def enter():
     global image, image2
-    image = load_image('WarpLogo.png')
-    image2 = load_image('DESIGNEDBY.png')
+    image = load_image('Resource\Image\Start_state\WarpLogo.png')
+    image2 = load_image('Resource\Image\Start_state\DESIGNEDBY.png')
     #image_1 = load_image()
     #image.opacify(0)
 

@@ -61,14 +61,14 @@ class Dialog:
         self.y = 500
         self.count = 1
         self.time_count = 0
-        self.image_1 = load_image('dialog_2.png')
-        self.image_2 = load_image('dialog_1.png')
-        self.image_3 = load_image('dialog_3.png')
-        self.image_4 = load_image('dialog_4.png')
-        self.image_5 = load_image('dialog_5.png')
-        self.image_6 = load_image('dialog_6.png')
-        self.image_7 = load_image('dialog_7.png')
-        self.image_8 = load_image('dialog_8.png')
+        self.image_1 = load_image('Resource\Image\Main_state\dialog_2.png')
+        self.image_2 = load_image('Resource\Image\Main_state\dialog_1.png')
+        self.image_3 = load_image('Resource\Image\Main_state\dialog_3.png')
+        self.image_4 = load_image('Resource\Image\Main_state\dialog_4.png')
+        self.image_5 = load_image('Resource\Image\Main_state\dialog_5.png')
+        self.image_6 = load_image('Resource\Image\Main_state\dialog_6.png')
+        self.image_7 = load_image('Resource\Image\Main_state\dialog_7.png')
+        self.image_8 = load_image('Resource\Image\Main_state\dialog_8.png')
 
         self.button = 0
         self.timing = 0
@@ -176,13 +176,12 @@ class Dialog:
             elif self.count == 8:
                 self.image_8.draw(self.x, self.y, 1000, 200)
 
-
 class Object_people:
     def __init__(self):
         self.x = PEOPLE_START_X
         self.y = PEOPLE_START_y
         self.timer = 0
-        self.image = load_image('people_1.png')
+        self.image = load_image('Resource\Image\Main_state\people_1.png')
         self.clipping = 0
 
     def draw(self):
@@ -215,10 +214,10 @@ class Object_bus:
         self.speed = 6
         self.timer_2 = 0
         self.image_type = 0
-        self.image = load_image('BUS_1.png')
-        self.image_2 = load_image('BUS_2.png')
-        self.image_3 = load_image('BUS_3.png')
-        self.image_4 = load_image('BUS_4.png')
+        self.image = load_image('Resource\Image\Main_state\BUS_1.png')
+        self.image_2 = load_image('Resource\Image\Main_state\BUS_2.png')
+        self.image_3 = load_image('Resource\Image\Main_state\BUS_3.png')
+        self.image_4 = load_image('Resource\Image\Main_state\BUS_4.png')
 
     def draw(self):
         if self.image_type == 0:
@@ -279,7 +278,7 @@ class Object_light:
         self.onoff_2 = LIGHT_ONOFF_SETTING
         self.onoff_3 = LIGHT_ONOFF_SETTING
         self.onoff_count = LIGHT_ONOFF_SETTING
-        self.image = load_image('Light_1.png')
+        self.image = load_image('Resource\Image\Main_state\Light_1.png')
 
     def draw(self):
         global MAP_MOVE
@@ -311,14 +310,14 @@ class Back:
     global MAP_MOVE
     global RESULT_X1
     def __init__(self):
-        self.image = load_image('MAP_1_bus.png')
-        self.image_front = load_image('MAP_1_front_bus.png')
-        self.grid_img = load_image('grid.png')
-        self.black_down = load_image('black_down_animation.png')
+        self.image = load_image('Resource\Image\Main_state\MAP_1_bus.png')
+        self.image_front = load_image('Resource\Image\Main_state\MAP_1_front_bus.png')
+        self.grid_img = load_image('Resource\Image\grid.png')
+        self.black_down = load_image('Resource\Image\Main_state\_black_down_animation.png')
         self.black_down_timer = 0
         self.black_down_screen = 1
 
-        self.thanks_img = load_image('thanksto.png')
+        self.thanks_img = load_image('Resource\Image\Main_state\_thanksto.png')
 
 
     def black_down_animation(self):
@@ -379,7 +378,6 @@ class Back:
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
-
 class Boy:
     image = None
 
@@ -387,7 +385,7 @@ class Boy:
         self.x, self.y = 470, 195 #120
         self.speed = 0
         self.frame = 0
-        self.image = load_image('youngFather_character_sprite.png')
+        self.image = load_image('Resource\Image\Main_state\youngFather_character_sprite.png')
         self.dir = -1
         self.frame_time = 0
         self.frame_off = 0
@@ -614,8 +612,8 @@ def enter():
     object_people = Object_people()
     dialog = Dialog()
 
-    bgm = load_music('Main_BGM.wav')
-   #bgm.play()
+    bgm = load_music('Resource\Sound\Main_BGM.ogg')
+    bgm.play()
 
 
 def handle_events():
@@ -650,11 +648,13 @@ def handle_events():
             boy.speed = 0
 
 def exit():
-    global boy, back, object_light, object_bus
+    global boy, back, object_light, object_bus, object_people, dialog
     del (boy)
     del (back)
     del (object_light)
     del (object_bus)
+    del (object_people)
+    del (dialog)
 
 def pause():
     pass

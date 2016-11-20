@@ -32,14 +32,14 @@ buffer_timer = 0
 def enter():
     global image, bgm, image_1, image_10, back_1, first_screen, chapter_1, chapter_10
 
-    chapter_1 = load_image('chapter_1_1.png')
-    chapter_10 = load_image('chapter_1_10.png')
+    chapter_1 = load_image('Resource\Image\Title_state\chapter_1_1.png')
+    chapter_10 = load_image('Resource\Image\Title_state\chapter_1_10.png')
 
-    image = load_image('black_screen_10.png')
-    back_1 = load_image('black_screen_1.png')
-    image_10 = load_image("story_1_10.png")
-    image_1 = load_image("story_1_1.png")
-    first_screen = load_image("first_screen.png")
+    image = load_image('Resource\Image\Title_state\_black_screen_10.png')
+    back_1 = load_image('Resource\Image\Title_state\_black_screen_1.png')
+    image_10 = load_image("Resource\Image\Title_state\story_1_10.png")
+    image_1 = load_image("Resource\Image\Title_state\story_1_1.png")
+    first_screen = load_image("Resource\Image\Title_state\First_screen.png")
 
 def exit():
     global image, back_1, image_10, image_1, first_screen, chapter_1, chapter_10
