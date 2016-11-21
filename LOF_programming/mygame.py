@@ -8,6 +8,6 @@ from pico2d import *
 
 open_canvas()
 
-game_framework.run(main_state)
+game_framework.run(main_state_2)
 
 # fill here

@@ -23,7 +23,6 @@ name = "MainState"
 GAME_VIEW = 0 # 0일때 줌 연출 , 1 일때 0에서 2로 가는단계, 2일때!!, 3이 가로등 , 4가 가로등으로인한 시점, 5가 중앙 6이 가로등 꺼짐 7일때, 화면 반으로 조절
 
 
-
 BUS_START_X = -150
 BUS_START_Y = 180
 
@@ -54,6 +53,7 @@ dialog = None
 object_light = None
 object_bus = None
 object_people = None
+
 
 class Dialog:
     def __init__(self):
@@ -176,6 +176,7 @@ class Dialog:
             elif self.count == 8:
                 self.image_8.draw(self.x, self.y, 1000, 200)
 
+
 class Object_people:
     def __init__(self):
         self.x = PEOPLE_START_X
@@ -204,6 +205,7 @@ class Object_people:
                 self.timer = 0
                 self.clipping += 50
                 self.x += 50
+
 
 class Object_bus:
 
@@ -269,6 +271,7 @@ class Object_bus:
             if self.x == 640:
                 view_8_speed = 0
 
+
 class Object_light:
     def __init__(self):
         self.x = LIGHT_START_X
@@ -305,6 +308,7 @@ class Object_light:
             if self.onoff_1_timer == 30:
                 self.onoff_1 = 1
                 GAME_VIEW = 3
+
 
 class Back:
     global MAP_MOVE
@@ -377,6 +381,7 @@ class Back:
     def make_grid(self):
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+
 
 class Boy:
     image = None
@@ -508,6 +513,7 @@ class Boy:
                    self.image.clip_draw(self.frame * 80, 200, 70, 100, self.x, self.y)
                 elif self.dir == -1:
                    self.image.clip_draw(self.frame * 80, 0, 70, 100, self.x, self.y)
+
 
 def handle_view():
     global view_change, view_change_rate
@@ -647,6 +653,7 @@ def handle_events():
             boy.frame = 0
             boy.speed = 0
 
+
 def exit():
     global boy, back, object_light, object_bus, object_people, dialog
     del (boy)
@@ -656,11 +663,14 @@ def exit():
     del (object_people)
     del (dialog)
 
+
 def pause():
     pass
 
+
 def resume():
     pass
+
 
 def update():
     boy.update()
@@ -674,6 +684,7 @@ def update():
     if bus_button == 1:
         object_bus.update()
     handle_view()
+
 
 def draw():
     clear_canvas()
