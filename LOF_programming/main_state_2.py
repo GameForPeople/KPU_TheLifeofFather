@@ -26,6 +26,8 @@ class Effect:
     white_img = None
     black_img = None
 
+    zoom_img = None
+
     def __init__(self):
         self.button_camera_effect = 0
         self.button_weather_effect = 0
@@ -51,6 +53,25 @@ class Effect:
         self.black_img = load_image('Resource\Image\Main_state_2\_black_effect.png')
         self.black_timer = 0
         self.black_draw_count = 0
+
+        self.zoom_img = load_image('Resource\Image\Main_state_2\save_img.png')
+        self.zoom_button = 0
+        self.zoom_value = 0
+
+    def zoom_effect_update(self):
+
+        if self.zoom_button == 1:
+            self.zoom_value +=1
+
+            print(self.zoom_value)
+
+            if self.zoom_value == 40:
+                self.zoom_button = 2
+
+    def zoom_effect_draw(self):
+        if self.zoom_button >= 1:
+            self.zoom_img.clip_draw_to_origin(0 + (int)(490 / 40) * self.zoom_value, 0 + (int)(180 / 40) * self.zoom_value,
+                                              1280 - (int)(1100 / 40) * self.zoom_value, 720 - (int)(560/40) *self.zoom_value , 0, 0, 1280, 720)
 
     def weather_effect_update(self):
 
@@ -78,7 +99,7 @@ class Effect:
             elif self.moon_button == 1:
                 self.moon_timer -= 0.01
 
-                print(self.moon_timer)
+                # print(self.moon_timer)
                 self.moon_y = 640 * math.sin(3.14 + self.moon_timer)
                 self.moon_x = 640 + 640 * math.cos(3.14 + self.moon_timer)
 
@@ -94,6 +115,8 @@ class Effect:
                     #    self.black_draw_count -= 1
                     #if self.moon_y < - 100:
                         self.moon_button = 2
+                        self.zoom_button = 1
+
 
     def weather_effect_draw(self):
         if self.sun_button == 1:
@@ -110,7 +133,7 @@ class Effect:
     def camera_effect(self):
 
         if self.button_camera_effect == 1:
-            self.camera_effect_value += 5
+            self.camera_effect_value += 10
             print(self.camera_effect_value)
 
             if self.camera_effect_value > 1550:
@@ -234,6 +257,7 @@ def update():
     father.update()
     effect.camera_effect()
     effect.weather_effect_update()
+    effect.zoom_effect_update()
 
 def draw():
     global father, back, effect
@@ -242,6 +266,8 @@ def draw():
     back.draw()
     father.draw()
     effect.weather_effect_draw()
+
+    effect.zoom_effect_draw()
 
     back.draw_grid()
     update_canvas()
