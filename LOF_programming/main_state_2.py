@@ -18,7 +18,7 @@ father = None
 back = None
 effect = None
 
-class Effect:
+class Effect:               # 각종 이펙트를 클래스 내부에서 정의할껍니다! 이펙트란 한놈의 여러 성질이니까.
 
     sun_img = None
     moon_img = None
@@ -26,7 +26,7 @@ class Effect:
     white_img = None
     black_img = None
 
-    zoom_img = None
+    zoom_img = None             # 이미지 크기 변환하기 -> 쫌 이상함
 
     def __init__(self):
         self.button_camera_effect = 0

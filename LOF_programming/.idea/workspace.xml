@@ -47,7 +47,7 @@
       <file leaf-file-name="title_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/title_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-619">
+            <state relative-caret-position="924">
               <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -60,7 +60,7 @@
       <file leaf-file-name="main_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-505">
+            <state relative-caret-position="567">
               <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -92,15 +92,18 @@
       <file leaf-file-name="main_state_2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_state_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="73" column="60" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
+            <state relative-caret-position="200">
+              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#4609#4824#0" expanded="false" />
-                <element signature="e#5389#5393#0" expanded="false" />
-                <element signature="e#5428#5551#0" expanded="false" />
-                <element signature="e#5571#7956#0" expanded="false" />
-                <element signature="e#7229#7956#0" expanded="false" />
+                <element signature="e#522#1545#0" expanded="false" />
+                <element signature="e#1590#1759#0" expanded="false" />
+                <element signature="e#1801#2095#0" expanded="false" />
+                <element signature="e#4704#4919#0" expanded="false" />
+                <element signature="e#5484#5488#0" expanded="false" />
+                <element signature="e#5523#5646#0" expanded="false" />
+                <element signature="e#5666#8051#0" expanded="false" />
+                <element signature="e#7324#8051#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -109,7 +112,7 @@
       <file leaf-file-name="rect.py" pinned="false" current-in-tab="false">
         <entry file="file://D:/Python/Lib/site-packages/sdl2/rect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
+            <state relative-caret-position="819">
               <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
@@ -119,7 +122,7 @@
       <file leaf-file-name="pico2d.py" pinned="false" current-in-tab="false">
         <entry file="file://D:/Python/Lib/site-packages/pico2d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="641">
+            <state relative-caret-position="2121">
               <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
               <folding>
                 <element signature="e#238#274#0" expanded="false" />
@@ -223,7 +226,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -298,6 +300,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -484,7 +487,7 @@
     <frame x="-8" y="0" width="1932" height="1038" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25862068" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25757575" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1072,7 +1075,7 @@
     </entry>
     <entry file="file://D:/Python/Lib/site-packages/pico2d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
+        <state relative-caret-position="2121">
           <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
           <folding>
             <element signature="e#238#274#0" expanded="false" />
@@ -1106,7 +1109,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/title_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-619">
+        <state relative-caret-position="924">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -1117,7 +1120,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-505">
+        <state relative-caret-position="567">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -1162,7 +1165,7 @@
     </entry>
     <entry file="file://D:/Python/Lib/site-packages/sdl2/rect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
+        <state relative-caret-position="819">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
@@ -1170,15 +1173,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main_state_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="73" column="60" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
+        <state relative-caret-position="200">
+          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#4609#4824#0" expanded="false" />
-            <element signature="e#5389#5393#0" expanded="false" />
-            <element signature="e#5428#5551#0" expanded="false" />
-            <element signature="e#5571#7956#0" expanded="false" />
-            <element signature="e#7229#7956#0" expanded="false" />
+            <element signature="e#522#1545#0" expanded="false" />
+            <element signature="e#1590#1759#0" expanded="false" />
+            <element signature="e#1801#2095#0" expanded="false" />
+            <element signature="e#4704#4919#0" expanded="false" />
+            <element signature="e#5484#5488#0" expanded="false" />
+            <element signature="e#5523#5646#0" expanded="false" />
+            <element signature="e#5666#8051#0" expanded="false" />
+            <element signature="e#7324#8051#0" expanded="false" />
           </folding>
         </state>
       </provider>
