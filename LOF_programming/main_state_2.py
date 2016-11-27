@@ -5,6 +5,8 @@ import math
 from pico2d import *
 
 
+# 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!
+
 name = "Main_State_2"
 
 SCREEN_X = 1280
