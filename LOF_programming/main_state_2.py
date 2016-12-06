@@ -5,7 +5,7 @@ import math
 from pico2d import *
 
 
-# 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!
+# 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!2
 
 name = "Main_State_2"
 
@@ -118,7 +118,6 @@ class Effect:               # 각종 이펙트를 클래스 내부에서 정의�
                     #if self.moon_y < - 100:
                         self.moon_button = 2
                         self.zoom_button = 1
-
 
     def weather_effect_draw(self):
         if self.sun_button == 1:
