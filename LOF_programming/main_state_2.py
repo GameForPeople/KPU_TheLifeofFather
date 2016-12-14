@@ -1,9 +1,6 @@
 import game_framework
 
-import math
-
 from pico2d import *
-
 
 # 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!2
 
@@ -20,7 +17,8 @@ father = None
 back = None
 effect = None
 
-class Effect:               # 각종 이펙트를 클래스 내부에서 정의할껍니다! 이펙트란 한놈의 여러 성질이니까.
+
+class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 이펙트란 한놈의 여러 성질이니까.
 
     sun_img = None
     moon_img = None
@@ -169,6 +167,7 @@ class Back:
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
+
 class Father:
     image = None
 
@@ -248,6 +247,7 @@ def enter():
     back = Back()
     effect = Effect()
 
+
 def exit():
     pass
     #close_canvas()
@@ -259,6 +259,7 @@ def update():
     effect.camera_effect()
     effect.weather_effect_update()
     effect.zoom_effect_update()
+
 
 def draw():
     global father, back, effect

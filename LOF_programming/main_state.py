@@ -231,14 +231,13 @@ class Object_bus:
         elif self.image_type == 4 or self.image_type == 5:
             if GAME_VIEW > 8:
                 self.image_4.clip_draw_to_origin(0,0, 372, 230, self.x - 186 - handle_count * 2, self.y - 115 - (int)(handle_count / 8), 372 + 4 * handle_count, 230 + 2*handle_count)
-                #self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
+                # self.image.clip_draw_to_origin(RESULT_X1 - 640 + MAP_MOVE + 2 * handle_count, 0 + (int)(handle_count / 4) , SCREEN_X - 2 * handle_count, SCREEN_Y - 2 * handle_count, 0, 0, SCREEN_X, SCREEN_Y)
 
             else:
                 self.image_4.draw(self.x, self.y, 372, 230)
 
     def stop(self):
         self.speed = 0
-
 
     def update(self):
         global GAME_VIEW
@@ -290,7 +289,6 @@ class Object_light:
         if self.onoff_1 == 1:
             self.image.draw(self.x - MAP_MOVE , self.y, 262, 291)
 
-
         if self.onoff_2 == 1:
             self.image.draw(self.x + MAGIC_X1 - MAP_MOVE + 8, self.y, 262, 291)
 
@@ -298,7 +296,7 @@ class Object_light:
         global GAME_VIEW
 
         if self.onoff_2 == 1 and self.onoff_1_timer < 30:
-            self.onoff_1_timer = self.onoff_1_timer + 1
+            self.onoff_1_timer += 1
 
             if self.onoff_1_timer % 10 < 5:
                 self.onoff_1 = 1
