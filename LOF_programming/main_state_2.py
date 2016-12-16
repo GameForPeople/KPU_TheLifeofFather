@@ -260,6 +260,8 @@ def update():
     effect.weather_effect_update()
     effect.zoom_effect_update()
 
+    delay(0.02)
+
 
 def draw():
     global father, back, effect

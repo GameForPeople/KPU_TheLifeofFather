@@ -295,6 +295,8 @@ class Object_light:
     def update(self):
         global GAME_VIEW
 
+        delay(0.02)
+
         if self.onoff_2 == 1 and self.onoff_1_timer < 30:
             self.onoff_1_timer += 1
 
