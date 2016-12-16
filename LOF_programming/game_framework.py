@@ -69,6 +69,7 @@ def quit():
 def run(start_state):
     global running, stack
     running = True
+
     stack = [start_state]
     start_state.enter()
     while (running):

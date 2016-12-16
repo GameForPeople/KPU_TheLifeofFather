@@ -6,7 +6,7 @@ import main_state_2
 
 from pico2d import *
 
-open_canvas()
+open_canvas(1280, 720, True)
 
 game_framework.run(main_state_2)
 
