@@ -9,6 +9,7 @@ name = "Main_State_2"
 SCREEN_X = 1280
 SCREEN_Y = 720
 
+
 FATHER_SPEED = 10
 grid_button = 0
 map_sector = 1  # 2장은 가로로 볼떄 크게 두가지 페이지로 이루어집니다!! 1은 집하고 베이커리잇는곳 2는 회사잇는곳! 스크롤링은 추후처리
@@ -59,17 +60,29 @@ class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 
         self.zoom_value = 0
 
     def zoom_effect_update(self):
+        global map_sector
+        global father, back
 
         if self.zoom_button == 1:
-            self.zoom_value +=1
+            self.zoom_value += 1
 
             print(self.zoom_value)
 
-            if self.zoom_value == 40:
-                self.zoom_button = 2
+            if self.zoom_value == 45:
+                self.zoom_button = 0
+                self.camera_effect_value = 0
+
+                self.moon_button = 2
+
+                map_sector = 2
+                back.image_select = 3
+
+                father.x = 550
+                father.button_draw_father = 1
+
 
     def zoom_effect_draw(self):
-        if self.zoom_button >= 1:
+        if self.zoom_button == 1:
             self.zoom_img.clip_draw_to_origin(0 + (int)(490 / 40) * self.zoom_value, 0 + (int)(180 / 40) * self.zoom_value,
                                               1280 - (int)(1100 / 40) * self.zoom_value, 720 - (int)(560/40) *self.zoom_value , 0, 0, 1280, 720)
 
@@ -124,10 +137,12 @@ class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 
             for i in range (0, self.white_draw_count, 1):
                 self.white_img.draw(640, 360)
         elif self.moon_button >= 1:
-            self.moon_img.draw(self.moon_x, self.moon_y)
+            if self.moon_button == 1:
+                self.moon_img.draw(self.moon_x, self.moon_y)
 
-            for i in range (0, self.black_draw_count, 1):
-                self.black_img.draw(640, 360)
+            if self.moon_button >= 1:
+                for i in range (0, self.black_draw_count, 1):
+                    self.black_img.draw(640, 360)
 
     def camera_effect(self):
 
@@ -143,12 +158,16 @@ class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 
 class Back:
     image = None
     out_image = None
+    dark_out_image = None
     grid_img = None
     image_select = 1            # 1일때는 in! 2일때는 아웃!이미지 프린팅!
+    Map_Move = 1280
 
     def __init__(self):
         self.image = load_image('Resource\Image\Main_state_2\MAP_2_back.png')
         self.out_image = load_image('Resource\Image\Main_state_2\MAP_2_back_2.png')
+        self.dark_out_image = load_image('Resource\Image\Main_state_2\MAP_2_back_3.png')
+
         self.grid_img = load_image('Resource\Image\grid.png')
 
     def draw(self):
@@ -159,6 +178,15 @@ class Back:
         elif self.image_select == 2:
             self.out_image.clip_draw_to_origin(0 + SCREEN_X * (map_sector - 1), 0 + effect.camera_effect_value, SCREEN_X,
                                                SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        elif self.image_select == 3:
+            self.dark_out_image.clip_draw_to_origin(0 + self.Map_Move , 0,
+                                                    SCREEN_X + self.Map_Move, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+
+    def update_mapmove(self):
+        global father
+
+        if self.image_select == 3:
+            self.Map_Move += father.dir * father.speed
 
     def draw_front(self):
         pass
@@ -166,7 +194,6 @@ class Back:
     def draw_grid(self):
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
-
 
 class Father:
     image = None
@@ -179,6 +206,7 @@ class Father:
         self.dir = -1
         self.frame_time = 0
         self.button_draw_father = 1
+        self.need_effect = 0
        # self.frame_off = 0
        # self.timer = 0
        # self.count = 0
@@ -199,10 +227,11 @@ class Father:
                 self.x = 30
 
         elif map_sector == 2:
-            if self.x > 520 and self.speed == 0 and self.x < 600:  # 캐릭터가 회사건물에 들어갈떄...
+            if self.need_effect == 0 and self.x > 520 and self.speed == 0 and self.x < 600:  # 캐릭터가 회사건물에 들어갈떄...
                 self.button_draw_father = 0             #아빠의 위치를 off해주고
                 effect.button_camera_effect = 1                #카메라 이펙트 1 작동!
                 self.x = 0                              #위치를 바꿔줘서 렉을 방지할꺼야!
+                self.need_effect = 1                    # 무한루프를 방지할꺼야!
 
 
         if self.speed:
@@ -250,7 +279,7 @@ def enter():
 
 def exit():
     pass
-    #close_canvas()
+    # close_canvas()
 
 
 def update():
@@ -259,6 +288,7 @@ def update():
     effect.camera_effect()
     effect.weather_effect_update()
     effect.zoom_effect_update()
+    back.update_mapmove()
 
     delay(0.02)
 
@@ -270,7 +300,6 @@ def draw():
     back.draw()
     father.draw()
     effect.weather_effect_draw()
-
     effect.zoom_effect_draw()
 
     back.draw_grid()
