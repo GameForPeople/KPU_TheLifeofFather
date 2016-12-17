@@ -23,6 +23,7 @@ obj = None
 class Object_group:
     bakery_img = None
     foodtruck_img = None
+    light_img = None
 
     def __init__(self):
         self.bakery_img = load_image('Resource\Image\Main_state_2\_bakery.png')
@@ -31,12 +32,16 @@ class Object_group:
         self.bakery_button = 0
         self.bakery_timer = 0
         self.bakery_count = 10
-        self.bakery_x = 0
+        # self.bakery_x = 0
 
         self.foodtruck_button = 0
         self.foodtruck_timer = 0
         self.foodtruck_count = 0
-        self.foodtruck_x = 0
+        # self.foodtruck_x = 0
+
+        self.light_img = load_image('Resource\Image\Main_state_2\Light_1.png')
+        self.light_x = 0
+        self.light_button = 0
 
     def draw(self):
         global back
@@ -50,11 +55,25 @@ class Object_group:
                  self.foodtruck_img.clip_draw_to_origin(0, 0,
                                         480, 512, 850 - back.Map_Move, 75)
 
+    def light_draw(self):
+        if self.light_button >= 1:
+                self.light_img.clip_draw_to_origin(0, 0,
+                                                   262, 291, 1332 - back.Map_Move, 73)
+        if self.light_button == 2:
+                self.light_img.clip_draw_to_origin(0, 0,
+                                                   262, 291, 550 - back.Map_Move, 73)
+
     def update(self):
         global back, father
 
         if back.Map_Move >= 818 and back.Map_Move <= 822:
             self.foodtruck_button = 1
+
+        if back.Map_Move >= 832 and back.Map_Move <= 842:
+            self.light_button = 1
+
+        if back.Map_Move <= 180:
+            self.light_button = 2
 
         if self.foodtruck_button == 1:
             self.bakery_timer += 1
@@ -204,6 +223,7 @@ class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 
                 self.button_camera_effect = 0
                 self.button_weather_effect = 1
 
+
 class Back:
     image = None
     out_image = None
@@ -247,6 +267,7 @@ class Back:
         if grid_button == 1:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
+
 class Father:
     image = None
 
@@ -273,6 +294,8 @@ class Father:
         elif back.image_select == 3:
             if back.Map_Move <= 0:
                 self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
+                if self.x <= 410 :
+                    self.button_draw_father = 0
             else:
                 self.x = 640
 
@@ -335,9 +358,11 @@ def enter():
     effect = Effect()
     obj = Object_group()
 
+
 def exit():
     pass
     # close_canvas()
+
 
 def update():
     global father, obj, effect, back
@@ -359,6 +384,7 @@ def draw():
     back.draw()
     obj.draw()
     father.draw()
+    obj.light_draw()
     effect.weather_effect_draw()
     effect.zoom_effect_draw()
 
