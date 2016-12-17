@@ -17,6 +17,56 @@ map_sector = 1  # 2장은 가로로 볼떄 크게 두가지 페이지로 이루�
 father = None
 back = None
 effect = None
+obj = None
+
+
+class Object_group:
+    bakery_img = None
+    foodtruck_img = None
+
+    def __init__(self):
+        self.bakery_img = load_image('Resource\Image\Main_state_2\_bakery.png')
+        self.foodtruck_img = load_image('Resource\Image\Main_state_2\_foodtruck.png')
+
+        self.bakery_button = 0
+        self.bakery_timer = 0
+        self.bakery_count = 10
+        self.bakery_x = 0
+
+        self.foodtruck_button = 0
+        self.foodtruck_timer = 0
+        self.foodtruck_count = 0
+        self.foodtruck_x = 0
+
+    def draw(self):
+        global back
+
+        if back.image_select == 3:
+            for i in range(0, self.bakery_count, 1):
+                 self.bakery_img.clip_draw_to_origin(0, 0,
+                                        480, 512, 850 - back.Map_Move, 75)
+
+            for i in range(0, self.foodtruck_count, 1):
+                 self.foodtruck_img.clip_draw_to_origin(0, 0,
+                                        480, 512, 850 - back.Map_Move, 75)
+
+    def update(self):
+        global back, father
+
+        if back.Map_Move >= 818 and back.Map_Move <= 822:
+            self.foodtruck_button = 1
+
+        if self.foodtruck_button == 1:
+            self.bakery_timer += 1
+            self.foodtruck_timer += 1
+
+            if self.bakery_timer == 5:
+                self.bakery_timer = 0
+                self.bakery_count -= 1
+
+            if self.foodtruck_timer == 5:
+                self.foodtruck_timer = 0
+                self.foodtruck_count += 1
 
 
 class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 이펙트란 한놈의 여러 성질이니까.
@@ -154,14 +204,13 @@ class Effect:  # 각종 이펙트를 클래스 내부에서 정의할껍니다! 
                 self.button_camera_effect = 0
                 self.button_weather_effect = 1
 
-
 class Back:
     image = None
     out_image = None
     dark_out_image = None
     grid_img = None
     image_select = 1            # 1일때는 in! 2일때는 아웃!이미지 프린팅!
-    Map_Move = 1280
+    Map_Move = 1200
 
     def __init__(self):
         self.image = load_image('Resource\Image\Main_state_2\MAP_2_back.png')
@@ -172,6 +221,7 @@ class Back:
 
     def draw(self):
         global map_sector, effect
+
         if self.image_select == 1:
             self.image.clip_draw_to_origin(0 + SCREEN_X * (map_sector - 1), 0 + effect.camera_effect_value, SCREEN_X,
                                            SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
@@ -179,14 +229,16 @@ class Back:
             self.out_image.clip_draw_to_origin(0 + SCREEN_X * (map_sector - 1), 0 + effect.camera_effect_value, SCREEN_X,
                                                SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
         elif self.image_select == 3:
-            self.dark_out_image.clip_draw_to_origin(0 + self.Map_Move , 0,
-                                                    SCREEN_X + self.Map_Move, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+            self.dark_out_image.clip_draw_to_origin(self.Map_Move , 0,
+                                                    SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
-    def update_mapmove(self):
+    def update_MapMove(self):
         global father
 
-        if self.image_select == 3:
+        if self.image_select == 3 and self.Map_Move > 0:
             self.Map_Move += father.dir * father.speed
+
+        print(self.Map_Move)
 
     def draw_front(self):
         pass
@@ -216,7 +268,13 @@ class Father:
         global map_sector
         global effect
 
-        self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
+        if back.image_select != 3:
+            self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
+        elif back.image_select == 3:
+            if back.Map_Move <= 0:
+                self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
+            else:
+                self.x = 640
 
         if map_sector == 1:     # 캐릭터가 밖으로 나올경우! 집모양을 바꿔줄꺼야!
             if self.x > 520:
@@ -271,24 +329,25 @@ class Father:
 
 
 def enter():
-    global father, back, effect
+    global father, back, effect, obj
     father = Father()
     back = Back()
     effect = Effect()
-
+    obj = Object_group()
 
 def exit():
     pass
     # close_canvas()
 
-
 def update():
-    global father
+    global father, obj, effect, back
+
     father.update()
     effect.camera_effect()
     effect.weather_effect_update()
     effect.zoom_effect_update()
-    back.update_mapmove()
+    back.update_MapMove()
+    obj.update()
 
     delay(0.02)
 
@@ -298,9 +357,11 @@ def draw():
 
     clear_canvas()
     back.draw()
+    obj.draw()
     father.draw()
     effect.weather_effect_draw()
     effect.zoom_effect_draw()
+
 
     back.draw_grid()
     update_canvas()
