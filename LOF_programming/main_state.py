@@ -15,7 +15,7 @@ MAGIC_X1 = 1380      # DISTANCE 가로등 1 ~ 가로등 2 //절대좌표
 RESULT_X1 = 2190     # 2190 일때 MAP_MOVE 초기화
 count_x1 = 0         # MAGIC_X1 측정 -> 버그있으니 수정이 필요함 -> 플레이어의 컨트롤 권한을 뻇으면 해결할 수 있는 문제라고 생각됨
 
-BOY_SPEED = 3       # 남자 어른의 스피드는 3으로 설정합니다. -> 애기 1/2, 유치원 1, 남자 노인 2, 남자 어른 3, 학생 6
+FATHER_SPEED = 3       # 남자 어른의 스피드는 3으로 설정합니다. -> 애기 1/2, 유치원 1, 남자 노인 2, 남자 어른 3, 학생 6
 MAP_MOVE = 0        # 맵의 움직임을 통해 카메라 연출 목적으로 사용됨
 
 name = "MainState"
@@ -45,7 +45,7 @@ view_9_speed = 2
 handle_count = 0
 time_check = 0
 
-boy = None
+father = None
 back = None
 font = None
 bgm = None
@@ -75,7 +75,7 @@ class Dialog:
         self.x_5 = 0
 
     def update(self):
-        global GAME_VIEW, boy, view_change
+        global GAME_VIEW, father, view_change
         if self.button == 0:
             self.timing += 1
 
@@ -134,7 +134,7 @@ class Dialog:
 
         if self.button > 0:
             if GAME_VIEW == 5:
-                self.x_5 += boy.speed * (-1) * boy.dir
+                self.x_5 += father.speed * (-1) * father.dir
 
         if self.button == 1:
             self.time_count += 1
@@ -189,11 +189,11 @@ class Object_people:
         #self.image.draw(self.x, self.y, 152, 117)
         self.image.clip_draw_to_origin(0, 0, 152 - self.clipping, 117, self.x, self.y)
     def update(self):
-        global boy
+        global father
         global object_bus
 
         if GAME_VIEW == 5:
-            self.x = 2750 - boy.x  #boy.dir * BOY_SPEED
+            self.x = 2750 - father.x  #father.dir * father_SPEED
 
         if GAME_VIEW == 8:
             self.x -= view_8_speed
@@ -383,7 +383,8 @@ class Back:
                 self.grid_img.clip_draw_to_origin(0, 0, SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
 
 
-class Boy:
+class Father:
+
     image = None
 
     def __init__(self):
@@ -521,7 +522,7 @@ def handle_view():
     global change_rate
     global change_balance
     global MAP_MOVE
-    global boy
+    global father
     global view_8_speed
     global view_9_speed
     global handle_count
@@ -570,8 +571,8 @@ def handle_view():
            GAME_VIEW = 2
 
     elif GAME_VIEW == 3:
-        MAP_MOVE = MAP_MOVE + 10
-        boy.x = boy.x - 10
+        MAP_MOVE += + 10
+        father.x -= - 10
 
         if MAP_MOVE == 600:
             GAME_VIEW = 4
@@ -609,9 +610,9 @@ def handle_view():
 
 
 def enter():
-    global boy, back, object_light, object_bus, object_people, dialog, bgm
+    global father, back, object_light, object_bus, object_people, dialog, bgm
     #open_canvas()
-    boy = Boy()
+    father = Father()
     back = Back()
     object_light = Object_light()
     object_bus = Object_bus()
@@ -623,7 +624,7 @@ def enter():
 
 
 def handle_events():
-    global boy
+    global father
     global GAME_VIEW
     global view_change
     global grid_button
@@ -635,11 +636,11 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if GAME_VIEW != 0 and GAME_VIEW != 1 and GAME_VIEW != 3:
                 if event.key == SDLK_LEFT:
-                    boy.dir = -1
-                    boy.speed = BOY_SPEED
+                    father.dir = -1
+                    father.speed = FATHER_SPEED
                 elif event.key == SDLK_RIGHT:
-                    boy.dir = 1
-                    boy.speed = BOY_SPEED
+                    father.dir = 1
+                    father.speed = FATHER_SPEED
 
             if event.key == SDLK_ESCAPE:
                 game_framework.change_state(title_state)
@@ -650,13 +651,13 @@ def handle_events():
                     grid_button = 0
 
         elif event.type == SDL_KEYUP:
-            boy.frame = 0
-            boy.speed = 0
+            father.frame = 0
+            father.speed = 0
 
 
 def exit():
-    global boy, back, object_light, object_bus, object_people, dialog
-    del (boy)
+    global father, back, object_light, object_bus, object_people, dialog
+    del (father)
     del (back)
     del (object_light)
     del (object_bus)
@@ -673,13 +674,14 @@ def resume():
 
 
 def update():
-    boy.update()
-    boy.control_Y()
+    father.update()
+    father.control_Y()
     object_light.update()
     object_people.update()
     dialog.update()
 
-    #print (GAME_VIEW)
+    print (GAME_VIEW)
+
     back.black_down_animation_tiemr()
     if bus_button == 1:
         object_bus.update()
@@ -691,7 +693,7 @@ def draw():
     back.draw()
 
     object_people.draw()
-    boy.draw()
+    father.draw()
     object_light.draw()
 
     if bus_button == 1:
