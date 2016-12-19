@@ -11,8 +11,22 @@ FATHER_SPEED = 4
 father = None
 back = None
 bus = None
+movie = None
 
 grid_button = 0
+
+
+class Movie:
+    def __init__(self):
+        self.button = 1
+        self.timer_1 = 0
+
+    def update(self):
+        global bus, father
+        if self.button == 1:
+            if bus.x >= 1280:
+                father.dir = 1
+                father.speed = FATHER_SPEED
 
 
 class Bus:
@@ -67,16 +81,58 @@ class Back:
     image = None
     grid_img = None
 
+    nos_img_1 = None
+    nos_img_2 = None
+
+    black_screen = None
+    light_img = None
+
+    end_img = None
+
     def __init__(self):
         self.image = load_image('Resource\Image\Main_state_4\MAP_1.png')
+
+        self.nos_img_1 = load_image('Resource\Image\Main_state_4\save_img_1_alpha.png')
+        self.nos_img_2 = load_image('Resource\Image\Main_state_4\save_img_2_alpha.png')
+
+        self.black_screen = load_image('Resource\Image\Main_state_4\_black_screen_10.png')
+
+        self.light_img = load_image('Resource\Image\Main_state_4\Light_1.png')
+
+        self.end_img = load_image('Resource\Image\Main_state_4\_theEnd.png')
+
+        self.nos_1_timer = 0
+        self.nos_2_timer = 0
+        self.all_timer = 0
+        self.black_timer = 0
+        self.light_timer = 0
+
+        self.black_button = 0
+        self.light_button = 0
+        self.end_button = 0
 
         self.mapmove = 0
 
         self.grid_img = load_image('Resource\Image\grid.png')
 
     def draw(self):
-        global back
-        self.image.clip_draw_to_origin(4000 + back.mapmove, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+        global father
+        self.image.clip_draw_to_origin(4000 + self.mapmove, 0, SCREEN_X, SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+
+        for i in range(0, self.nos_1_timer, 1):
+            self.nos_img_1.clip_draw_to_origin(0, 0, 703, 695, 170, 300, 300, 300)
+
+        for i in range(0, self.nos_2_timer, 1):
+            self.nos_img_2.clip_draw_to_origin(0, 0, 826, 817, 810, 300, 300, 300)
+
+        for i in range(0, self.black_timer, 1):
+            self.black_screen.draw(640, 360)
+
+        for i in range(0, self.light_timer, 1):
+            self.light_img.clip_draw_to_origin(0, 0, 262, 291, 460, 70, 262, 291)
+
+        if self.end_button == 1:
+            self.end_img.clip_draw_to_origin(0, 0, 300, 83, 490, 100, 200, 55)
 
     def update(self):
         global father
@@ -84,8 +140,42 @@ class Back:
         if father.view_button == 1:
             self.mapmove += father.dir * father.speed
 
-            print(self.mapmove)
 
+        elif father.view_button == 2:
+            self.all_timer += 1
+
+            if self.black_button == 0:
+                if self.nos_1_timer < 20:
+                    if self.all_timer == 3:
+                        self.nos_1_timer += 1
+                        self.all_timer = 0
+                elif self.nos_2_timer < 20:
+                    if self.all_timer == 3:
+                        self.nos_2_timer += 1
+                        self.all_timer = 0
+
+                        if self.nos_2_timer == 20:
+                            self.black_button = 1
+                            self.all_timer = - 50
+
+            elif self.light_button == 1:
+                if self.light_timer <= 3:
+                    if self.all_timer == 5:
+                        self.light_timer += 1
+                        self.all_timer = 0
+
+                elif self.light_timer == 4 and self.all_timer == 20:
+                    self.end_button = 1
+
+            elif self.black_button == 1:
+                if self.all_timer == 5:
+                    self.nos_1_timer -= 4
+                    self.nos_2_timer -= 4
+                    self.black_timer += 1
+                    self.all_timer = 0
+
+                    if self.black_timer == 10:
+                        self.light_button = 1
 
     def draw_front(self):
         pass
@@ -163,21 +253,29 @@ class Father:
 
 
 def enter():
-    global father, back, bus
+    global father, back, bus, movie
     father = Father()
     back = Back()
     bus = Bus()
+    movie = Movie()
+
 
 def exit():
-    pass
+    global movie, bus, back, father
+    del (movie)
+    del (bus)
+    del (back)
+    del (father)
+
     #close_canvas()
 
 
 def update():
-    global father, bus, back
+    global father, bus, back, movie
     father.update()
     bus.update()
     back.update()
+    movie.update()
 
     delay(0.02)
 

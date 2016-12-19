@@ -10,7 +10,7 @@ SCREEN_X = 1280
 SCREEN_Y = 720
 
 
-FATHER_SPEED = 10
+FATHER_SPEED = 4
 grid_button = 0
 map_sector = 1  # 2장은 가로로 볼떄 크게 두가지 페이지로 이루어집니다!! 1은 집하고 베이커리잇는곳 2는 회사잇는곳! 스크롤링은 추후처리
 
@@ -18,6 +18,173 @@ father = None
 back = None
 effect = None
 obj = None
+title = None
+movie = None
+
+MODE_editor = 0         # 타이틀 같은거 나오게 할거고 다음에는 응응 그 게임 나오게 할꺼야
+
+class Movie:
+    def __init__(self):
+        self.button = 0
+        self.timer = 0
+
+    def update(self):
+        global back, father, obj, FATHER_SPEED
+
+        if back.image_select == 1 or back.image_select == 2:
+            father.dir = 1
+            father.speed = FATHER_SPEED
+        elif back.image_select == 3:
+            if obj.light_button == 1 and self.button == 0:
+                self.button = 1
+
+            elif self.button == 1:
+                self.timer += 1
+                father.speed = 0
+                father.frame = 0
+                father.frame_time = 0
+
+                if self.timer == 40:
+                    father.dir = -1
+                    father.speed = FATHER_SPEED
+                    self.timer = 0
+                    self.button = 2
+
+            elif self.button == 2 and back.Map_Move < 330:
+                self.button = 3
+
+            elif self.button == 3:
+                self.timer += 1
+                father.speed = 0
+                father.frame = 0
+                father.frame_time = 0
+                father.dir = 1
+
+                if self.timer == 100:
+                    father.dir = -1
+                    father.speed = FATHER_SPEED
+                    self.button = 4
+                    self.timer = 0
+
+            elif self.button == 4 and back.Map_Move < 260:
+                self.button = 5
+
+
+            elif self.button == 5:
+                self.timer += 1
+                father.speed = 0
+                father.frame = 0
+                father.frame_time = 0
+                father.dir = 1
+
+                if self.timer == 40:
+                    father.dir = -1
+                    father.speed = FATHER_SPEED
+                    self.button = 6
+            else:
+                father.dir = -1
+                father.speed = FATHER_SPEED
+        else:
+            father.speed = 0
+
+
+class Title:
+    chapter_img = None
+    title_img = None
+    black_img = None
+    first_img = None
+
+    def __init__(self):
+        self.chapter_img = load_image('Resource\Image\Main_state_2\chapter_2.png')
+        self.title_img = load_image('Resource\Image\Main_state_2\_title_1.png')
+        self.black_img = load_image('Resource\Image\Main_state_2\_black_screen_10.png')
+        self.first_img = load_image('Resource\Image\Main_state_2\_first_img.png')
+
+        self.black_timer = 15
+        self.title_timer = 0
+        self.chapter_timer = 0
+
+        self.all_timer = 0
+
+        self.black_button = 1
+        self.title_button = 0
+        self.chapter_button = 0
+
+    def draw(self):
+
+        self.first_img.draw(640, 360)
+
+        for i in range(0, self.black_timer, 1):
+            self.black_img.draw(640, 360)
+
+        for i in range(0, self.chapter_timer, 1):
+            self.chapter_img.draw(640, 360)
+
+        for i in range(0, self.title_timer, 1):
+            self.title_img.draw(640, 360)
+
+    def update(self):
+        global MODE_editor
+
+        self.all_timer += 1
+
+        print(self.chapter_timer)
+
+        if self.chapter_button == 0:
+            if self.chapter_timer == 0:
+                if self.all_timer == 50:
+                    self.chapter_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.chapter_timer += 1
+
+                if self.chapter_timer == 10:
+                    self.chapter_button = 1
+
+        elif self.chapter_button == 1:
+            if self.chapter_timer == 10:
+                if self.all_timer == 50:
+                    self.chapter_timer = 9
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.chapter_timer -= 1
+
+                if self.chapter_timer == 0:
+                    self.chapter_button = 2
+
+        elif self.title_button == 0:
+            if self.title_timer == 0:
+                if self.all_timer == 50:
+                    self.title_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.title_timer += 1
+
+                if self.title_timer == 10:
+                    self.title_button = 1
+
+        elif self.title_button == 1:
+            if self.title_timer == 10:
+                if self.all_timer == 50:
+                    self.title_timer = 9
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.title_timer -= 1
+
+                if self.title_timer == 0:
+                    self.title_button = 2
+
+        elif self.black_button == 1:
+            if self.all_timer == 5:
+                self.all_timer = 0
+                self.black_timer -= 1
+
+                if self.black_timer == 0:
+                    MODE_editor = 1
 
 
 class Object_group:
@@ -228,6 +395,9 @@ class Back:
     image = None
     out_image = None
     dark_out_image = None
+
+    black_img = None
+
     grid_img = None
     image_select = 1            # 1일때는 in! 2일때는 아웃!이미지 프린팅!
     Map_Move = 1200
@@ -238,6 +408,10 @@ class Back:
         self.dark_out_image = load_image('Resource\Image\Main_state_2\MAP_2_back_3.png')
 
         self.grid_img = load_image('Resource\Image\grid.png')
+        self.black_img = load_image('Resource\Image\Main_state_2\_black_screen_10.png')
+
+        self.black_timer = 0
+        self.black_button = 0
 
     def draw(self):
         global map_sector, effect
@@ -251,6 +425,15 @@ class Back:
         elif self.image_select == 3:
             self.dark_out_image.clip_draw_to_origin(self.Map_Move , 0,
                                                     SCREEN_X , SCREEN_Y, 0, 0, SCREEN_X, SCREEN_Y)
+
+    def draw_black(self):
+        if self.black_button == 1:
+            for i in range(0, self.black_timer, 1):
+                self.black_img.draw(640, 360)
+
+    def update_black(self):
+        if self.black_button == 1:
+            self.black_timer += 1
 
     def update_MapMove(self):
         global father
@@ -294,8 +477,9 @@ class Father:
         elif back.image_select == 3:
             if back.Map_Move <= 0:
                 self.x += self.dir * self.speed  # 1번의 단위시간동안 1번 이동합니다.
-                if self.x <= 410 :
+                if self.x <= 450:
                     self.button_draw_father = 0
+                    back.black_button = 1
             else:
                 self.x = 640
 
@@ -308,7 +492,7 @@ class Father:
                 self.x = 30
 
         elif map_sector == 2:
-            if self.need_effect == 0 and self.x > 520 and self.speed == 0 and self.x < 600:  # 캐릭터가 회사건물에 들어갈떄...
+            if self.need_effect == 0 and self.x > 520 and  self.x < 600:  # 캐릭터가 회사건물에 들어갈떄...
                 self.button_draw_father = 0             #아빠의 위치를 off해주고
                 effect.button_camera_effect = 1                #카메라 이펙트 1 작동!
                 self.x = 0                              #위치를 바꿔줘서 렉을 방지할꺼야!
@@ -352,42 +536,60 @@ class Father:
 
 
 def enter():
-    global father, back, effect, obj
+    global father, back, effect, obj, title, movie
     father = Father()
     back = Back()
     effect = Effect()
     obj = Object_group()
+    title = Title()
+    movie = Movie()
 
 
 def exit():
-    pass
-    # close_canvas()
+    global father, back, effect, obj, title, movie
+    del (father)
+    del (back)
+    del (effect)
+    del (obj)
+    del (title)
+    del (movie)
 
 
 def update():
-    global father, obj, effect, back
+    global father, obj, effect, back, title, movie, MODE_editor
 
-    father.update()
-    effect.camera_effect()
-    effect.weather_effect_update()
-    effect.zoom_effect_update()
-    back.update_MapMove()
-    obj.update()
+    if MODE_editor == 1:
+        father.update()
+        effect.camera_effect()
+        effect.weather_effect_update()
+        effect.zoom_effect_update()
+        back.update_MapMove()
+        back.update_black()
+
+        obj.update()
+        movie.update()
+
+    elif MODE_editor == 0:
+        title.update()
 
     delay(0.02)
 
 
 def draw():
-    global father, back, effect
+    global father, back, effect, title, MODE_editor
 
-    clear_canvas()
-    back.draw()
-    obj.draw()
-    father.draw()
-    obj.light_draw()
-    effect.weather_effect_draw()
-    effect.zoom_effect_draw()
+    if MODE_editor == 1:
+        clear_canvas()
+        back.draw()
+        obj.draw()
+        father.draw()
+        obj.light_draw()
+        effect.weather_effect_draw()
+        effect.zoom_effect_draw()
+        back.draw_black()
 
+    elif MODE_editor == 0:
+        title.draw()
 
     back.draw_grid()
     update_canvas()

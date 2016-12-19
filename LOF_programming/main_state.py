@@ -53,6 +53,26 @@ dialog = None
 object_light = None
 object_bus = None
 object_people = None
+movie = None
+
+
+class Movie:
+    def __init__(self):
+        self.button = 1
+
+    def update(self):
+        global GAME_VIEW, object_light, father
+
+        if GAME_VIEW == 2 and object_light.onoff_1 == 0:
+            father.dir = 1
+            father.speed = FATHER_SPEED
+        elif GAME_VIEW == 4 or GAME_VIEW == 5 or GAME_VIEW == 6:
+            father.dir = 1
+            father.speed = FATHER_SPEED
+        else:
+            father.speed = 0
+            father.frame = 0
+
 
 
 class Dialog:
@@ -572,7 +592,7 @@ def handle_view():
 
     elif GAME_VIEW == 3:
         MAP_MOVE += + 10
-        father.x -= - 10
+        father.x += - 10
 
         if MAP_MOVE == 600:
             GAME_VIEW = 4
@@ -610,7 +630,7 @@ def handle_view():
 
 
 def enter():
-    global father, back, object_light, object_bus, object_people, dialog, bgm
+    global father, back, object_light, object_bus, object_people, dialog, bgm, movie
     #open_canvas()
     father = Father()
     back = Back()
@@ -618,6 +638,7 @@ def enter():
     object_bus = Object_bus()
     object_people = Object_people()
     dialog = Dialog()
+    movie = Movie()
 
     bgm = load_music('Resource\Sound\Main_BGM.ogg')
     bgm.play()
@@ -656,14 +677,14 @@ def handle_events():
 
 
 def exit():
-    global father, back, object_light, object_bus, object_people, dialog
+    global father, back, object_light, object_bus, object_people, dialog, movie
     del (father)
     del (back)
     del (object_light)
     del (object_bus)
     del (object_people)
     del (dialog)
-
+    del (movie)
 
 def pause():
     pass
@@ -679,6 +700,7 @@ def update():
     object_light.update()
     object_people.update()
     dialog.update()
+    movie.update()
 
     print (GAME_VIEW)
 

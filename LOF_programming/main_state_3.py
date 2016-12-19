@@ -121,6 +121,7 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
         elif self.button == 7:
             Movie.scene_7(self)
 
+
 class Car:
 
     image0 = None
@@ -378,8 +379,15 @@ def enter():
     movie = Movie()
     car = Car()
 
+
 def exit():
-    pass
+    global father, back, son, movie, car
+    del (father)
+    del (son)
+    del (movie)
+    del (car)
+    del (back)
+
     #close_canvas()
 
 
