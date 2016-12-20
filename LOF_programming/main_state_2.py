@@ -2,6 +2,8 @@ import game_framework
 
 from pico2d import *
 
+import main_state_3
+
 # 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!2
 
 name = "Main_State_2"
@@ -432,8 +434,12 @@ class Back:
                 self.black_img.draw(640, 360)
 
     def update_black(self):
+        global father
         if self.black_button == 1:
             self.black_timer += 1
+
+            if self.image_select == 3 and self.black_timer == 20 and father.button_draw_father == 0:
+                game_framework.change_state(main_state_3)
 
     def update_MapMove(self):
         global father
@@ -564,10 +570,10 @@ def update():
         effect.weather_effect_update()
         effect.zoom_effect_update()
         back.update_MapMove()
-        back.update_black()
 
         obj.update()
         movie.update()
+        back.update_black()
 
     elif MODE_editor == 0:
         title.update()

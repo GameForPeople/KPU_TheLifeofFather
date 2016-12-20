@@ -2,7 +2,7 @@ import game_framework
 
 from pico2d import *
 
-# 맵! 만들고!! 또는 그냥 회사이미지로 가던가 하고!// 불투명도 이미지 통해서 op값 조정 추가하고, 대사 추가하기!!2
+import main_state_4
 
 name = "Main_State_3"
 
@@ -20,6 +20,10 @@ back = None
 effect = None
 movie = None
 car = None
+title = None
+dia = None
+
+MODE_editor = 0
 
 
 class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓㅏㄹ안유라ㅗㄴ아!!
@@ -28,7 +32,7 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
         self.timer_4 = 0
 
     def first_scene(self):
-        global father, back
+        global father, back, dia, MODE_editor
 
         if father.x > 600:
             father.dir = -1
@@ -36,7 +40,10 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
 
         elif father.x <= 600:
             father.speed = 0
-            self.button = 2
+            #self.button = 2
+
+            MODE_editor = 2
+            dia.dia_1_button = 1
 
     def second_scene(self):
         global father, back
@@ -50,15 +57,21 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
             self.button = 3
 
     def third_scene(self):
-        global son, back
+        global son, back, MODE_editor
 
         if son.x < 600:
             son.dir = 1
             son.speed = SON_SPEED
 
+            if son.x == 300:
+                dia.dia_2_button = 1
+                MODE_editor = 2
+
         elif son.x >= 600:
             son.speed = 0
-            self.button = 4
+            #self.button = 4
+            dia.dia_3_button = 1
+            MODE_editor = 2
 
     def scene_4(self):
         global son
@@ -76,13 +89,15 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
                 self.button = 5
 
     def scene_5(self):
-        global back
+        global back, dia, MODE_editor
 
         if back.map_move > 200:
             back.map_move -= 50
 
         elif back.map_move <= 200:
-            self.button = 6
+            dia.dia_4_button = 1
+            MODE_editor = 2
+            #self.button = 6
 
     def scene_6(self):
         global back, father, son
@@ -98,12 +113,13 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
             self.button = 7
 
     def scene_7(self):
-        global father, son
+        global father, son, dia, MODE_editor
         son.y_plus -= son.speed / son.speed
         father.y_plus += FATHER_SPEED / FATHER_SPEED
 
         if son.y - father.y <= 2:
-            self.button = 8
+            dia.dia_5_button = 1
+            MODE_editor = 2
 
     def Scene_type(self):
         if self.button == 1:
@@ -120,6 +136,246 @@ class Movie: #여기서 그냥 모든 걸 박살 내 버리자!!!암ㄴㄷ호ㅓ
             Movie.scene_6(self)
         elif self.button == 7:
             Movie.scene_7(self)
+        elif self.button == 8:
+            game_framework.change_state(main_state_4)
+
+class Title:
+    title_img = None
+    black_img = None
+    first_img = None
+
+    def __init__(self):
+        self.title_img = load_image('Resource\Image\Main_state_3\_title.png')
+        self.black_img = load_image('Resource\Image\Main_state_3\_black_screen_10.png')
+        self.first_img = load_image('Resource\Image\Main_state_3\_first_img.png')
+
+        self.black_timer = 15
+        self.title_timer = 0
+
+        self.all_timer = 0
+
+        self.black_button = 1
+        self.title_button = 0
+
+    def draw(self):
+
+        self.first_img.draw(640, 360)
+
+        for i in range(0, self.black_timer, 1):
+            self.black_img.draw(640, 360)
+
+        for i in range(0, self.title_timer, 1):
+            self.title_img.draw(640, 360)
+
+    def update(self):
+        global MODE_editor
+
+        self.all_timer += 1
+
+        #print(self.chapter_timer)
+
+        if self.title_button == 0:
+            if self.title_timer == 0:
+                if self.all_timer == 50:
+                    self.title_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.title_timer += 1
+
+                if self.title_timer == 15:
+                    self.title_button = 1
+
+        elif self.title_button == 1:
+            if self.title_timer == 15:
+                if self.all_timer == 50:
+                    self.title_timer = 14
+                    self.all_timer = 0
+            elif self.all_timer == 5:
+                self.all_timer = 0
+                self.title_timer -= 1
+
+                if self.title_timer == 0:
+                    self.title_button = 2
+
+        elif self.black_button == 1:
+            if self.all_timer == 5:
+                self.all_timer = 0
+                self.black_timer -= 1
+
+                if self.black_timer == 0:
+                    MODE_editor = 1
+
+
+class Dia:
+    dia_1_img = None
+    dia_2_img = None
+    dia_3_img = None
+    dia_4_img = None
+    dia_5_img = None
+
+
+    def __init__(self):
+        self.dia_1_img = load_image('Resource\Image\Main_state_3\dia_1.png')
+        self.dia_2_img = load_image('Resource\Image\Main_state_3\dia_2.png')
+        self.dia_3_img = load_image('Resource\Image\Main_state_3\dia_3.png')
+        self.dia_4_img = load_image('Resource\Image\Main_state_3\dia_4.png')
+        self.dia_5_img = load_image('Resource\Image\Main_state_3\dia_5.png')
+
+
+        self.dia_1_timer = 0
+        self.dia_2_timer = 0
+        self.dia_3_timer = 0
+        self.dia_4_timer = 0
+        self.dia_5_timer = 0
+
+
+        self.all_timer = 0
+
+        self.dia_1_button = 0
+        self.dia_2_button = 0
+        self.dia_3_button = 0
+        self.dia_4_button = 0
+        self.dia_5_button = 0
+
+
+
+    def draw(self):
+
+        for i in range(0, self.dia_1_timer, 1):
+            self.dia_1_img.draw(640, 360)
+
+        for i in range(0, self.dia_2_timer, 1):
+            self.dia_2_img.draw(640, 360)
+
+        for i in range(0, self.dia_3_timer, 1):
+            self.dia_3_img.draw(640, 360)
+
+        for i in range(0, self.dia_4_timer, 1):
+            self.dia_4_img.draw(640, 360)
+
+        for i in range(0, self.dia_5_timer, 1):
+            self.dia_5_img.draw(640, 360)
+
+    def update(self):
+        global MODE_editor, movie
+        self.all_timer += 1
+
+        if self.dia_1_button == 1:
+            if self.dia_1_timer == 0:
+                if self.all_timer == 50:
+                    self.dia_1_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_1_timer += 1
+
+                if self.dia_1_timer == 20:
+                    self.dia_1_button = 2
+
+        elif self.dia_1_button == 2:
+            if self.dia_1_timer == 20:
+                if self.all_timer == 50:
+                    self.dia_1_timer = 19
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_1_timer -= 1
+
+                if self.dia_1_timer == 0:
+                    self.dia_1_button = 3
+                    MODE_editor = 1
+                    movie.button = 2
+
+        if self.dia_2_button == 1:
+            if self.dia_2_timer == 0:
+                if self.all_timer == 50:
+                    self.dia_2_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_2_timer += 1
+
+                if self.dia_2_timer == 30:
+                    self.dia_2_button = 2
+
+        elif self.dia_2_button == 2:
+            if self.dia_2_timer == 30:
+                if self.all_timer == 50:
+                    self.dia_2_timer = 29
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_2_timer -= 1
+
+                if self.dia_2_timer == 0:
+                    self.dia_2_button = 3
+                    MODE_editor = 1
+
+        if self.dia_3_button == 1:
+            if self.dia_3_timer == 0:
+                if self.all_timer == 50:
+                    self.dia_3_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_3_timer += 1
+
+                if self.dia_3_timer == 15:
+                    self.dia_3_button = 2
+
+        elif self.dia_3_button == 2:
+            if self.dia_3_timer == 15:
+                if self.all_timer == 50:
+                    self.dia_3_timer = 14
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_3_timer -= 1
+
+                if self.dia_3_timer == 0:
+                    self.dia_3_button = 3
+                    MODE_editor = 1
+                    movie.button = 4
+
+        if self.dia_4_button == 1:
+            if self.dia_4_timer == 0:
+                if self.all_timer == 50:
+                    self.dia_4_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_4_timer += 1
+
+                if self.dia_4_timer == 15:
+                    self.dia_4_button = 2
+
+        elif self.dia_4_button == 2:
+            if self.dia_4_timer == 15:
+                if self.all_timer == 50:
+                    self.dia_4_timer = 14
+                    self.all_timer = 0
+            elif self.all_timer == 3:
+                self.all_timer = 0
+                self.dia_4_timer -= 1
+
+                if self.dia_4_timer == 0:
+                    self.dia_4_button = 3
+                    MODE_editor = 1
+                    movie.button = 6
+
+        if self.dia_5_button == 1:
+            if self.dia_5_timer == 0:
+                if self.all_timer == 50:
+                    self.dia_5_timer = 1
+                    self.all_timer = 0
+            elif self.all_timer == 2:
+                self.all_timer = 0
+                self.dia_5_timer += 1
+
+                if self.dia_5_timer == 50:
+                    movie.button = 8
+                    MODE_editor = 1
 
 
 class Car:
@@ -372,46 +628,60 @@ class Father:
 
 
 def enter():
-    global father, back, son, movie, car
+    global father, back, son, movie, car, title, dia
     father = Father()
     back = Back()
     son = Son()
     movie = Movie()
     car = Car()
+    title = Title()
+    dia = Dia()
 
 
 def exit():
-    global father, back, son, movie, car
+    global father, back, son, movie, car, title, dia
     del (father)
     del (son)
     del (movie)
     del (car)
     del (back)
+    del (title)
+    del (dia)
 
     #close_canvas()
 
 
 def update():
-    global father, son, movie, car
-    father.update()
-    son.update()
-    movie.Scene_type()
-    car.update()
+    global father, son, movie, car, title, MODE_editor, dia
+
+    if MODE_editor == 1:
+        father.update()
+        son.update()
+        car.update()
+        movie.Scene_type()
+    elif MODE_editor == 0:
+        title.update()
+    elif MODE_editor == 2:
+        dia.update()
+
     delay(0.02)
 
 
 def draw():
-    global father, son, back, car
-
+    global father, son, back, car, title, MODE_editor, dia
     clear_canvas()
-    back.draw()
-    son.draw()
-    father.draw()
-    car.draw()
+
+    if MODE_editor >= 1:
+        back.draw()
+        son.draw()
+        father.draw()
+        car.draw()
+        dia.draw()
+    elif MODE_editor == 0:
+        title.draw()
 
     back.draw_grid()
     update_canvas()
-
 
 def handle_events():
     global father

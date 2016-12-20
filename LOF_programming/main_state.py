@@ -5,6 +5,7 @@ import os
 from pico2d import *
 
 import game_framework
+import main_state_2
 import title_state
 
 
@@ -72,7 +73,6 @@ class Movie:
         else:
             father.speed = 0
             father.frame = 0
-
 
 
 class Dialog:
@@ -343,9 +343,9 @@ class Back:
 
         self.thanks_img = load_image('Resource\Image\Main_state\_thanksto.png')
 
-
     def black_down_animation(self):
         self.black_down.clip_draw_to_origin(0, 0 + self.black_down_timer, 1280, 720 + self.black_down_timer, 0, 720 - self.black_down_screen , 1280, self.black_down_screen)
+
     def black_down_animation_tiemr(self):
         global GAME_VIEW
 
@@ -355,6 +355,9 @@ class Back:
 
             if self.black_down_screen < 720:
                 self.black_down_screen += 20
+
+            if self.black_down_timer >= 1440:
+                game_framework.change_state(main_state_2)
     def draw(self):
         global handle_count
 
@@ -703,10 +706,11 @@ def update():
     movie.update()
 
     print (GAME_VIEW)
-
-    back.black_down_animation_tiemr()
     if bus_button == 1:
         object_bus.update()
+
+    back.black_down_animation_tiemr()
+
     handle_view()
 
 
